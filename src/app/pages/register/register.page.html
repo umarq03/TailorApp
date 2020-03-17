@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="title">Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="form-content">
+<div id="container">
+  <ion-list>
+    <ion-item>
+        <ion-icon name="person"></ion-icon>
+      <ion-input type="email" [(ngModel)]="email" placeholder="Email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-icon name="lock-closed"></ion-icon>
+      <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+    </ion-item>
+    <ion-item line="none" class="info-1">
+      Already you have account? <span routerLink='/login'>Sign In</span>
+    </ion-item>
+
+    <ion-button color="success" expand="full" fill="solid"  (click)="getregister()" class="signup">Sign Up
+    </ion-button>
+  </ion-list>
+</div>
+
+</ion-content>

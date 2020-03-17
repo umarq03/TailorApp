@@ -1,5 +1,8 @@
 {
   "name": "tailorApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,32 @@
+.info-1{
+
+    font-size: 14px;
+    color: #999;
+}
+.info-1 span{
+
+    color: blue;
+}
+.center{
+
+    text-align: center;
+}
+.title{
+
+    text-align: center;
+}
+.signin{
+
+ text-transform: capitalize
+}
+
+#container{
+
+   padding: 120px 20px;
+//    position: relative;
+}
+ion-toolbar{
+
+    --background: #674172;
+    --color: white;
+}

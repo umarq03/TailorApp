@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar style="--background:#674172; color: white;">
+    <ion-title>FeedBack</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button [routerLink]="['/main-home']">
+            <ion-icon name="home-outline"></ion-icon>
+            <ion-label>Home</ion-label>
+            <!-- <ion-badge>6</ion-badge> -->
+          </ion-tab-button>
+      
+          <ion-tab-button [routerLink]="['/alert']">
+              <ion-icon name="document-sharp"  style="color:#674172;"></ion-icon>
+            <ion-label style="color:#674172;">Feedback</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button [routerLink]="['/about']">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+      
+
+</ion-content>
