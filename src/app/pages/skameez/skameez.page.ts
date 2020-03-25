@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController, MenuController, LoadingController,PopoverController } from '@ionic/angular';
+import { AlertController, ToastController, MenuController,
+LoadingController,PopoverController } from '@ionic/angular';
 import { analytics } from 'firebase';
 import { PopoverComponent } from 'src/app/popover/popover.component';
+import {Router} from '@angular/router';
+
+
 // import { SkfabPage } from '../skfab/skfab.page';
 @Component({
   selector: 'app-skameez',
@@ -10,9 +14,10 @@ import { PopoverComponent } from 'src/app/popover/popover.component';
 })
 export class SKameezPage implements OnInit {
 
-  constructor( private menu: MenuController,private popoverCtrl: PopoverController) { 
+  constructor( private menu: MenuController,
+    private popoverCtrl: PopoverController,public router: Router) 
+    { 
     // this.menu.enable(false, 'first');
-   
   }
  
 
@@ -27,7 +32,12 @@ export class SKameezPage implements OnInit {
     });
     return await popover.present();
   }
+  // Submit(){
+  //   this.ro("/home") 
 
-  
-
+  // }
+  form ={}
+  measurment(){
+    console.log(this.form);
+  }
 }

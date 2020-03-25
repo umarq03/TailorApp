@@ -1,5 +1,5 @@
 {
-  "name": "tailorApp",
+  "name": "TailorApp",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -30,7 +30,7 @@
     "cordova-browser": "^6.0.0",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
-    "firebase": "^7.8.2",
+    "firebase": "^7.11.0",
     "ionic-img-viewer": "^2.9.0",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.4",

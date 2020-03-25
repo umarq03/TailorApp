@@ -3,17 +3,17 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Measurements</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="optionsPopover($event)">
-          <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>  
-        </ion-button>
-      </ion-buttons>
+    <ion-title>Categories</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="optionsPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+
   <ion-list>
     <ion-item [routerLink]="['/skameez']">
       <ion-avatar slot="start">
@@ -24,7 +24,6 @@
       </ion-label>
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-item>
-
     <ion-item [routerLink]="['/pant']">
       <ion-avatar slot="start">
         <img src="assets/images/2.jpg">
@@ -34,8 +33,17 @@
       </ion-label>
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-item>
+    <ion-item [routerLink]="['/fabrics']">
+      <ion-avatar slot="start">
+        <img src="assets/fab.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>Fabrics</h3>
+      </ion-label>
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-item>
 
-    <ion-item [routerLink]="['/shirt']">
+    <!-- <ion-item [routerLink]="['/shirt']">
       <ion-avatar slot="start">
         <img src="assets/images/3.jpg">
       </ion-avatar>
@@ -44,7 +52,7 @@
       </ion-label>
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-item>
-      <!-- // Adding a comment here -->
+   
     <ion-item [routerLink]="['/coat']">
       <ion-avatar slot="start">
         <img src="assets/images/4.jpg">
@@ -54,7 +62,6 @@
       </ion-label>
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-item>
-    <!-- // Adding a comment here -->
     <ion-item [routerLink]="['/waistcoat']">
       <ion-avatar slot="start">
         <img src="assets/images/6.jpg">
@@ -64,7 +71,7 @@
       </ion-label>
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-item>
-    <!--this is a new comment   -->
+    
     <ion-item [routerLink]="['/kurta']">
       <ion-avatar slot="start">
         <img src="assets/images/5.jpg">
@@ -125,4 +132,4 @@
       </ion-tab-bar>
     </ion-tabs>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

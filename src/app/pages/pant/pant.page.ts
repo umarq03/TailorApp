@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pant',
@@ -8,11 +9,15 @@ import { MenuController } from '@ionic/angular';
 })
 export class PantPage implements OnInit {
 
-  constructor( private menu: MenuController) {
+  text: any;
+
+  constructor( private menu: MenuController, public avtiveRoute: ActivatedRoute) {
     this.menu.enable(true, 'first');
    }
 
   ngOnInit() {
+
+    this.text = this.avtiveRoute.snapshot.paramMap.get('text');
   }
 
 }

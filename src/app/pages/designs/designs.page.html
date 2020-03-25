@@ -5,19 +5,27 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
 
-      <ion-buttons slot="end">
-          <ion-button (click)="optionsPopover($event)">
-            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>  
-          </ion-button>
-        </ion-buttons>
-        
+    <ion-buttons slot="end">
+      <ion-button (click)="optionsPopover($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <form (ngSubmit)="task()">
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="favdish.dish" name="DISH" placeholder="Enter the text here"></ion-input>
+        </ion-item>
+        <ion-button type="submit" block>submit</ion-button>
+        </form>
+  <ion-input placeholder="Enter here" [(ngModel)]="text"></ion-input>
+  <ion-button (click)="passData()">sendData</ion-button>
+  
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <ion-tabs id="content2" root="tabs">
 
@@ -45,4 +53,4 @@
       </ion-tab-bar>
     </ion-tabs>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
