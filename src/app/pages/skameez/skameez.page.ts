@@ -37,7 +37,7 @@ export class SKameezPage implements OnInit {
 
   // }
   form ={}
-  measurment(){
+  Measurment(){
     console.log(this.form);
   }
 }
