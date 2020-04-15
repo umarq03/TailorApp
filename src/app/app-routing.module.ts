@@ -35,14 +35,17 @@ const routes: Routes = [
     path: 'fabrics',
     loadChildren: () => import('./pages/fabrics/fabrics.module').then( m => m.FabricsPageModule)
   },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
-  },
+ 
   {
     path: 'pant',
     loadChildren: () => import('./pages/pant/pant.module').then( m => m.PantPageModule)
   },
+  {
+    path: 'shirt',
+    loadChildren: () => import('./pages/shirt/shirt.module').then( m => m.ShirtPageModule)
+  },
+ 
+
   {
     path: 'coat',
     loadChildren: () => import('./pages/coat/coat.module').then( m => m.CoatPageModule)
@@ -67,10 +70,7 @@ const routes: Routes = [
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
-  {
-    path: 'shirt',
-    loadChildren: () => import('./pages/shirt/shirt.module').then( m => m.ShirtPageModule)
-  },
+  
   {
     path: 'pricelist',
     loadChildren: () => import('./pages/pricelist/pricelist.module').then( m => m.PricelistPageModule)
@@ -80,18 +80,59 @@ const routes: Routes = [
     loadChildren: () => import('./pages/skameez/skameez.module').then( m => m.SKameezPageModule)
   },
   {
-    path: 'menu',
-    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+    path: 'skameez/:id',
+    loadChildren: () => import('./pages/skameez/skameez.module').then( m => m.SKameezPageModule)
   },
   {
     path: 'skfab',
     loadChildren: () => import('./pages/skfab/skfab.module').then( m => m.SkfabPageModule)
   },
   {
-    path: 'image-modal',
-    loadChildren: () => import('./pages/image-modal/image-modal.module').then( m => m.ImageModalPageModule)
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
+    path: 'kameezdesigns',
+    loadChildren: () => import('./pages/kameezdesigns/kameezdesigns.module').then( m => m.KameezdesignsPageModule)
+  },
+  
+  {
+    path: 'create-customer',
+    loadChildren: () => import('./customers/create-customer/create-customer.module').then( m => m.CreateCustomerPageModule)
+  },
+  {
+    path: 'create-customer/:id',
+    loadChildren: () => import('./customers/create-customer/create-customer.module').then( m => m.CreateCustomerPageModule)
+  },
+///
+  ///list
+  {
+    path: 'list',
+    loadChildren: () => import('./customers/customer-list/customer-list.module').then( m => m.CustomerListPageModule)
+  },
+  {
+    path: 'customer',
+    loadChildren: () => import('./customers/customer-details/customer-details.module').then( m => m.CustomerDetailsPageModule)
+  },
+  {
+    path: 'customer/:id',
+    loadChildren: () => import('./customers/customer-details/customer-details.module').then( m => m.CustomerDetailsPageModule)
   },
 
+  //as a list
+  {
+    path: 'admin-database',
+    loadChildren: () => import('./adminpanel/admin-database/admin-database.module').then( m => m.AdminDatabasePageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
+  },
+  {
+    path: 'skdatabase',
+    loadChildren: () => import('./adminpanel/skdatabase/skdatabase.module').then( m => m.SkdatabasePageModule)
+  },
+////
 ];
 
 @NgModule({

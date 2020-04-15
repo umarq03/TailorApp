@@ -1,5 +1,5 @@
-<ion-header no-border>
-  <ion-toolbar>
+<ion-header ion-no-border>
+  <ion-toolbar color="medium">
     <ion-title class="title">Sign In</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +21,7 @@
       To start it would be nice to pray.<br />
       If you don't have an account, Get <span (click)="getregister()">Sign UP</span>
     </p>
-    <ion-button color="success" expand="full" fill="solid" (click)="getlogin()" class="signin" [disabled]="disabledbutton">Sign In
+    <ion-button color="success" expand="full" fill="solid" (click)="getlogin()" class="signin" [disabled]="disabledbtn">Sign In
     </ion-button>
   </ion-list>
 </div>

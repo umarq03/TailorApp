@@ -9,16 +9,14 @@ import { PopoverComponent } from 'src/app/popover/popover.component';
 export class CategoriesPage implements OnInit {
 
   constructor( private menu: MenuController, private popoverCtrl: PopoverController) { 
-   
-    // this.menu.enable(true, 'first');
+
+    this.menu.swipeGesture(false);
   }
-  // openFirst() {
-  //   this.menu.enable(true, 'first');
-  //   this.menu.open('first');
-  // }
+ 
   
 
   ngOnInit() {
+    
   }
 
   async optionsPopover(ev: any) {

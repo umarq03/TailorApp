@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-toolbar slot="start" style="--background:#674172; color: white;">
+  <ion-toolbar color="medium">
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
+          <ion-back-button defaultHref="categories"></ion-back-button>
         </ion-buttons>
     <ion-title>Pant</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+   
 </ion-content>
 <ion-footer>
   <ion-toolbar>
@@ -20,20 +20,14 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button [routerLink]="['/alert']">
-          <ion-icon name="document-outline"></ion-icon>
-          <ion-label>Feedback</ion-label>
-        </ion-tab-button>
+  
 
         <ion-tab-button [routerLink]="['/about']">
           <ion-icon name="alert-circle-outline"></ion-icon>
           <ion-label>About</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button [routerLink]="['/menu']">
-          <ion-icon name="menu-outline"></ion-icon>
-          <ion-label>Menu</ion-label>
-        </ion-tab-button>
+       
 
       </ion-tab-bar>
     </ion-tabs>

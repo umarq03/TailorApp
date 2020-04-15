@@ -1,59 +1,56 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
-  <!-- <ion-menu side="end" menuId="first" contentId="content" class="startmenu" type="push">
-      <ion-header>
-        <ion-toolbar id="toolbar">
-          <img src="assets/logo.jpg" class="logo">
-          <ion-title class="title">Tailor Shop</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle>
-            <ion-item [routerLink]="['/main-home']" class="signoutbtn">
-              <ion-icon name="home-outline" class="i" style="color:#674172;"></ion-icon>
-              Home
-            </ion-item>
-          </ion-menu-toggle>
-  
-          <ion-menu-toggle>
-            <ion-item>
-              <ion-icon name="share-social-outline" class="i" style="color:#674172;"></ion-icon>
-              Share
-            </ion-item>
-          </ion-menu-toggle>
-  
-          <ion-menu-toggle>
-            <ion-item>
-              <ion-icon name="help-circle-outline" class="i" style="color:#674172;"></ion-icon>
-              Help
-            </ion-item>
-          </ion-menu-toggle>
-  
-          <ion-menu-toggle>
-            <ion-item>
-              <ion-icon name="star-half-outline" class="i" style="color:#674172;"></ion-icon>
-              Rate The App
-            </ion-item>
-          </ion-menu-toggle>
-  
-          <ion-menu-toggle>
-            <ion-item>
-              <ion-icon name="lock-open-outline" class="i" style="color:#674172;"></ion-icon>
-              Privacy Policy
-            </ion-item>
-          </ion-menu-toggle>
-  
-          <ion-menu-toggle>
-            <ion-item (click)="signout()" class="signoutbtn">
-              <ion-icon name="log-out-outline" class="i" style="color:#674172;"></ion-icon>
-              SignOut
-            </ion-item>
-          </ion-menu-toggle>
-  
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="content"></ion-router-outlet> -->
-  </ion-app>
-  
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
+<ion-menu side="start"  menuId="first" content-id="main" class="startmenu">
+  <ion-header>
+    <ion-toolbar style="--background:#674172; color: white;">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/main-home']">
+          <ion-icon name="home-outline"></ion-icon>
+          Home
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item [routerLink]="['/admin-database']">
+          <ion-icon name="book-outline"></ion-icon>
+          AdminPanel
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="share-social-outline"></ion-icon>
+          Share
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="help-circle-outline"></ion-icon>
+          Help
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          Privacy Policy
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="videocam-outline"></ion-icon>
+          Demo
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item (click)="logOut()">
+          <ion-icon name="log-out-outline"></ion-icon>
+          Sign Out
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

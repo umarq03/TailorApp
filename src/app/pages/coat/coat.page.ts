@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { DesignsPage } from '../designs/designs.page';
 
 @Component({
   selector: 'app-coat',
@@ -8,11 +10,22 @@ import { MenuController } from '@ionic/angular';
 })
 export class CoatPage implements OnInit {
 
-  constructor( private menu: MenuController) {
-    this.menu.enable(true, 'first');
+
+// url: string = 'assets/fabric/shalwarkameez/summer/1.jpg';
+
+
+  constructor( private menu: MenuController, private router: Router) {
+    // this.menu.enable(true, 'first');
    }
 
   ngOnInit() {
   }
+
+  // getData(){
+
+    
+
+  //   this.router.navigate(['/designs' ,{url:this.url}]);
+  // }
 
 }

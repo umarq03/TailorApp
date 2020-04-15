@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { PantPage } from '../pant/pant.page';
+
 
 @Component({
   selector: 'app-shirt',
@@ -7,12 +8,15 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./shirt.page.scss'],
 })
 export class ShirtPage implements OnInit {
+ rootPage:any;
+  constructor() {}
 
-  constructor( private menu: MenuController) {
-    this.menu.enable(true, 'first');
-   }
 
   ngOnInit() {
+  }
+
+  go(){
+    this.rootPage = PantPage;
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { auth } from 'firebase/app'
 import { Router } from '@angular/router';
-import { AlertController, ToastController, MenuController } from '@ionic/angular';
+import { AlertController, ToastController, MenuController, LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -19,28 +19,30 @@ export class RegisterPage implements OnInit {
 
   // user = {} as User;
 
-  constructor(private router: Router, private alert: AlertController, 
-    private dataAuth: AngularFireAuth, private toast: ToastController, private menu: MenuController) { 
-      
-      this.menu.enable(false, 'first');
-    }
+  constructor(private router: Router, private alert: AlertController,
+    private dataAuth: AngularFireAuth, private toast: ToastController, private menu: MenuController, private loadingCtrl: LoadingController) {
+
+    this.menu.enable(false, 'first');
+  }
 
   ngOnInit() {
   }
   async getregister() {
     try {
-
+     
+      const loading = await this.presentLoading();
       const { email, password } = this
-      const res = await this.dataAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-      this.AllertAll("Signed Up It Successful", "");
+      const res = await this.dataAuth.auth.createUserWithEmailAndPassword(this.email, this.password);
+    
+      this.AllertAll("Signing UP Successfully", "");
+      this.loadingCtrl.dismiss(); 
       console.log("Response", res);
       this.router.navigate(['/login']);
 
     } catch (error) {
-
-      this.AllertAll("Some Went Error", error.message);
-      console.log("MEG_ERROR", error);
-      console.dir("Error", error.message);
+      this.loadingCtrl.dismiss(); 
+      this.AllertAll('Invalid email, password,',error.message);
+        console.dir("Error", error.message);
     }
   }
 
@@ -56,6 +58,16 @@ export class RegisterPage implements OnInit {
 
     await this.allet.present();
 
+  }
+
+  async presentLoading() {
+    console.log('starting loading');
+     const loading = await this.loadingCtrl.create({
+      spinner: 'circles',
+      keyboardClose: true,
+      message: 'Signing you up, Please Wait'
+    });
+    return await loading.present();
   }
 
 

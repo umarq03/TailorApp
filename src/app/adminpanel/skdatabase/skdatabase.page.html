@@ -1,0 +1,32 @@
+<ion-content>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/categories">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    
+      <ion-list id="skeleton" *ngIf="searching || (skdata | async) == 0">
+          <ion-card lines="none" *ngFor="let i of [1,2,3,4,5,6]">
+                <ion-card-content>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-content> 
+          </ion-card>
+        </ion-list>
+    
+    <ion-list>
+      <ion-card button [routerLink]="['/skameez', sk.id]" *ngFor="let sk of (skdata | async) "
+        style="white-space: pre-wrap;">
+        <ion-card-content>
+          Name:{{ sk.fullname}}<br />
+          Fabric:{{sk.fabric}}<br />
+          phone:{{sk.design}}<br />  
+          Date:{{ sk.creaditAt | date:'short' }}
+        </ion-card-content>  
+      </ion-card>
+    </ion-list>
+
+</ion-content>

@@ -7,14 +7,14 @@
 
 .title2{
     position: relative;
-    bottom: 200px;
+    bottom: 150px;
     left: 80px;
 
 }
 
 .row-one{
 
-    bottom: 120px;
+    bottom: 70px;
     position: relative;
 }
 .category{
@@ -50,7 +50,7 @@
 // }
 .row-two{
 
-    bottom: 90px;
+    bottom: 20px;
     position: relative;
 }
 .fabrics{
@@ -147,6 +147,9 @@ h4{
     bottom: 28px;
     color: white;
   
+  }
+  ion-content{
+      position: absolute;
   }
 
   

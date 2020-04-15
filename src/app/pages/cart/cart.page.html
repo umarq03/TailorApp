@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="skfab"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <b>{{item.amount}}x</b>
+      <img src="{{item.image}}" alt="" style="height: 70px; width:70px;">
+      <b>{{item.name}}-<small>{{item.price | currency: 'Rs'}}</small></b>
+      <span slot="end">{{item.amount * item.price | currency: 'Rs'}}</span>
+      <ion-button slot="end" color="medium" fill="clear" (click)="removeItem(item)">
+        <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      Total: <span slot="end">{{ getTotal() | currency:'USD'}}</span>
+    </ion-item>
+  </ion-list>
+<div class="checkoutbtn">
+  <ion-button (click)="checkout()" color="danger" expand="full" fill="solid">CheckOut</ion-button>
+</div>
+</ion-content>

@@ -1,0 +1,53 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Ideas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list id="skeleton" *ngIf="searching || (ideas | async) == 0">
+        <ion-card lines="none" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+              <ion-card-content>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </ion-card-content> 
+        </ion-card>
+      </ion-list>
+
+  <ion-list>
+    <ion-card button [routerLink]="['/customer', idea.id]" *ngFor="let idea of (ideas | async) "
+      style="white-space: pre-wrap;">
+      <ion-card-content *ngIf="idea">
+        Name:{{ idea.name}}<br />
+        Fabric:{{idea.item}}<br />
+        ID:{{idea.id}}<br />  
+        Date:{{ idea.creaditAt | date:'short' }}
+      </ion-card-content>  
+    </ion-card>
+  </ion-list>
+ 
+  
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/customer">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content> -->
+
+<!-- <ng-template #skeleton  >
+  <ion-list *ngFor="let item of [1, 2, 3, 4]">
+      <ion-card>
+        <ion-card-content>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </ion-card-content>
+      </ion-card>
+  </ion-list>
+</ng-template> -->

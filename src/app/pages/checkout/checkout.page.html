@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title>CheckOut</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cart"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Order Information
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of items">
+          <b>{{item.amount}}x</b>
+          <ion-input type="hidden" [(ngModel)]="item" text>{{item.name}}-{{item.price | currency: 'Rs'}}</ion-input>
+        </ion-item>
+        <ion-item>
+          Total: <span slot="end">{{ getTotal() | currency:'USD'}}</span>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="customerDetails" padding>
+    <ion-item>
+      <ion-label>YourName</ion-label>
+      <ion-input type="text" placeholder="YourName" [(ngModel)]="yourname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>PhoneNumber</ion-label>
+      <ion-input type="number" placeholder="PhoneNumber" [(ngModel)]="phonenumber"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address</ion-label>
+      <ion-input type="text" placeholder="Address" [(ngModel)]="address"></ion-input>
+    </ion-item>
+    <div *ngFor="let item of [items]">
+      <ion-button (click)="placeOrder(yourname, phonenumber, address, item)" (click)="removeItem(item)" color="success"
+        expand="full" fill="solid" [disabled]="disablebtn">PlaceOrder</ion-button>
+    </div>
+  </div>
+
+
+
+</ion-content>

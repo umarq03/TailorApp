@@ -22,7 +22,7 @@ export class FabricsPage implements OnInit {
   };
 
   constructor( private menu: MenuController,private popoverCtrl: PopoverController, private router: Router) { 
-    this.menu.enable(true, 'first');
+    this.menu.swipeGesture(false);
   }
 
   ngOnInit() {

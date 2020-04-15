@@ -1,21 +1,18 @@
 <ion-header>
-  <ion-toolbar style="--background:#674172; color: white;">
+  <ion-toolbar color="medium">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="main-home"></ion-back-button>
     </ion-buttons>
     <ion-title>Fabrics</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="optionsPopover($event)">
-        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content padding>
 <div>
-  <ion-card class="uppercards" style="--background:#e4e9ed;" padding>
+  <ion-card class="uppercards" style="--background:white;" padding>
     <ion-slides pager="true" [options]="sliderOpts">
       <ion-slide>
         <img src="assets/fabric/3.jpg" alt="" class="upperimages">
@@ -50,7 +47,7 @@
       <ion-card-title>Fabrics Collection</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      Hi there, We Have Every Quality Of Unstitched Menswear Fabrics Of Summer And Winter Collections
+      <h4>Hi there,</h4>We Have Every Quality Of Unstitched Menswear Fabrics Of Summer And Winter Collections
     </ion-card-content>
   </ion-card>
 </div>
@@ -58,53 +55,45 @@
 <ion-grid>
   <ion-row>
     <ion-col col-6>
-        <ion-card class="fabric" (click)="skfab()" style="--background:#e4e9ed;">
-          <h3 text-wrap>Shalwar Kameez </h3>
+        <ion-card class="fabric" (click)="skfab()" style="--background:white;" class="skfab">
+          <img src="assets/sk2logo.jpg" alt="" style="width: 70px; height:70px;">
         </ion-card>
     </ion-col>
 
     <ion-col col-6>
-      <ion-card class="fabric" style="--background:#e4e9ed;">
-        <h3 text-wrap>Pant</h3>
+      <ion-card class="fabric" style="--background:white;" class="skfab">
+        <img src="assets/pant.jpg" alt="" style="width: 70px; height:70px;">
       </ion-card>
   </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col col-6>
-        <ion-card class="fabric" style="--background:#e4e9ed;">
-          <h3 text-wrap>Shirt</h3>
+        <ion-card class="fabric" style="--background: white;" class="skfab">
+          <img src="assets/shirt.jpg" alt="" style="width: 70px; height:70px;">
         </ion-card>
     </ion-col>
 
     <ion-col col-6>
-      <ion-card class="fabric" style="--background:#e4e9ed;">
-        <h3 text-wrap>Coat</h3>
+      <ion-card class="fabric" style="--background:white;" class="skfab">
+        <img src="assets/coat.jpg" alt="" style="width: 70px; height:70px;">
       </ion-card>
   </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col col-6>
-        <ion-card class="fabric" style="--background:#e4e9ed;">
-          <h3 text-wrap>Waist Coat</h3>
+        <ion-card class="fabric" style="--background:white;" class="skfab">
+          <img src="assets/waistcoat.jpg" alt="" style="width: 70px; height:70px;">
         </ion-card>
     </ion-col>
 
     <ion-col col-6>
-      <ion-card class="fabric" style="--background:#e4e9ed;">
-        <h3 text-wrap>Two Piece</h3>
+      <ion-card class="fabric" style="--background:white;" class="skfab">
+        <img src="assets/twopiece.jpg" alt="" style="width: 70px; height:70px;">
       </ion-card>
   </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col col-6>
-        <ion-card class="fabric" style="--background:#e4e9ed;">
-          <h3 text-wrap>Three Piece</h3>
-        </ion-card>
-    </ion-col>
-  </ion-row>
+</ion-row>
 </ion-grid>
 
 </ion-content>
@@ -118,20 +107,13 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button [routerLink]="['/alert']">
-          <ion-icon name="document-outline"></ion-icon>
-          <ion-label>Feedback</ion-label>
-        </ion-tab-button>
 
         <ion-tab-button [routerLink]="['/about']">
           <ion-icon name="alert-circle-outline"></ion-icon>
           <ion-label>About</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button [routerLink]="['/menu']">
-          <ion-icon name="menu-outline"></ion-icon>
-          <ion-label>Menu</ion-label>
-        </ion-tab-button>
+      
 
       </ion-tab-bar>
     </ion-tabs>

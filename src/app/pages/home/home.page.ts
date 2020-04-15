@@ -10,14 +10,15 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  tabBarElement:any;
+  // tabBarElement:any;
  
 
-  slideOpts = {
+  // sliderOpts = {
 
-    initialSlide : 0,
-    speed : 400
-  };
+  //   slidesPerView: 2,
+  //   centeredSlides: true,
+  //   spaceBetween: 10,
+  // };
 
   constructor(private router: Router, private menu: MenuController) { 
 
@@ -30,8 +31,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
   }
-
- 
 
   navigatetologin(){
 

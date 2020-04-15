@@ -1,36 +1,35 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, NavParams } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http/ngx';
-// import firebaseConfig from './firebase';
+import { HttpClientModule } from '@angular/common/http';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {from} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFirestoreModule, } from '@angular/fire/firestore';
-// import { ToastController, NavController, MenuController} from '@ionic/angular';
-import { Platform, NavController, MenuController, ToastController } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
-import { ImageModalPageModule } from './pages/image-modal/image-modal.module';
 import { SkfabPageModule } from './pages/skfab/skfab.module';
-
-
-
-
+import { SKameezPageModule } from './pages/skameez/skameez.module';
+import { CoatPageModule } from './pages/coat/coat.module';
+import { DesignsPageModule } from './pages/designs/designs.module';
+import { MenuComponent } from './menu/menu.component';
+import { MainHomePageModule } from './pages/main-home/main-home.module';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import {AngularFireStorageModule, AngularFireStorage} from '@angular/fire/storage';
+import {SuperTabsModule} from '@ionic-super-tabs/angular'
+import {Network} from '@ionic-native/network/ngx';
 
 
 
 @NgModule({
-  declarations: [AppComponent, PopoverComponent],
-  entryComponents: [PopoverComponent],
+  declarations: [AppComponent, PopoverComponent, MenuComponent],
+  entryComponents: [PopoverComponent, MenuComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(), 
@@ -42,8 +41,17 @@ import { SkfabPageModule } from './pages/skfab/skfab.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ImageModalPageModule,
-    // SkfabPageModule
+    SkfabPageModule,
+    SKameezPageModule,
+    CoatPageModule,
+    DesignsPageModule,
+    MainHomePageModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    SuperTabsModule.forRoot()
+   
+
+    
     
     
    
@@ -51,13 +59,13 @@ import { SkfabPageModule } from './pages/skfab/skfab.module';
   providers: [
     StatusBar,
     SplashScreen,
-    // SkfabPageModule
-    // AccessProviders,
-    // ServiceproviderService,
+    NavParams,
+    Network,
     
     
    
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

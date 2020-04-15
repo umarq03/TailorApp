@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, NavController, MenuController, PopoverController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { ActivatedRoute, Router, Routes, RouterModule } from '@angular/router';
-import { PopoverComponent } from 'src/app/popover/popover.component';
+import {Network} from '@ionic-native/network/ngx';
+import { ToastController } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,55 +11,31 @@ import { PopoverComponent } from 'src/app/popover/popover.component';
 })
 export class MainHomePage implements OnInit {
 
-  allet: any;
-  present:any;
+ 
 
-  constructor
-    (private astoast: ToastController,
-      private asAuth: AngularFireAuth,
-      private navCtrl: NavController,
-      private activatedRoute: ActivatedRoute,
-      private router: Router,
-      private menu: MenuController,
-      private toast: ToastController,
-      private popoverCtrl: PopoverController,
-     ) {
-        
-        // this.menu.enable(true, 'first');
-       }
+  constructor(public network: Network, private toastCtrl: ToastController) {   
+    this.network.onDisconnect().subscribe(() =>{
+      this.showToast('NetWork is Disconnected, Sorry!')
+    });
+    
+    this.network.onConnect().subscribe(() =>{
+      
+      this.showToast('NetWork is Connected, Enjoy'!)
 
-  
+
+    });
+ }
+
   ngOnInit() {
   }
 
-  async optionsPopover(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverComponent,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
+  showToast(msg) {
+    this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
   }
-
   
-  
-  // signout() {
-  //   this.asAuth.auth.signOut();
-  //   this.AllertAll("Signed Out Successfully", "");
-  //   this.router.navigate(['/home']);
-  // }
-  // async AllertAll(header: string, message: string) {
 
-  //   this.allet = await this.toast.create({
-
-  //     header: header,
-  //     message: message,
-  //     // buttons: ['ok']
-  //     duration: 3000
-  //   })
-  //   await this.allet.present();
-  // }
-
- 
 
 }

@@ -9,7 +9,7 @@ small{
 
     color: green;
 }
-h3{
+.label{
     color: #999;
     
 }
@@ -32,4 +32,28 @@ textarea{
 
     right: 40px;
     top: 110px;
+}
+
+.square{
+
+    height: 230px;
+    width: 330px;
+    // background-color:whitesmoke;
+    border: 1px solid black;
+}
+#button{
+
+    padding: 0 10px;
+}
+h6{
+
+    color: #999;
+}
+ion-input{
+
+    left: 10px;
+}
+.submitbtn{
+
+    padding: 0 10px;
 }

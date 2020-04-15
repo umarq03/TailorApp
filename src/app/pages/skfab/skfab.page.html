@@ -1,17 +1,26 @@
 <ion-header>
-  <ion-toolbar style="--background:#674172; color: white;">
+  <ion-toolbar color="medium">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="fabrics"></ion-back-button>
     </ion-buttons>
-    <ion-title>ShalwarKameez Fabrics</ion-title>
+    <ion-title>S.K Fab</ion-title>
+
+    <ion-buttons slot="end">
+        <!-- <ion-badge *ngIf="cart.length > 0">{{cart.length}}</ion-badge> -->
+        <div>{{cartItemCount | async}}</div>
+        <ion-button (click)="openCart()" #cart>
+          <ion-icon name="cart" slot="icon-only"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+      
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="--background: whitesmoke;">
 
   <ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged($event)" value="'summer'" [(ngModel)]="galleryType">
-      <ion-segment-button value="summer">
+    <ion-segment color="primary" (ionChange)="segmentChanged($event)" [(ngModel)]="galleryType">
+      <ion-segment-button value="summer" checked>
         <ion-label>Summer</ion-label>
       </ion-segment-button>
       <ion-segment-button value="winter">
@@ -21,238 +30,34 @@
   </ion-toolbar>
 
   <div [ngSwitch]="galleryType" class="grid">
-
     <ion-grid *ngSwitchCase="'summer'">
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/1.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/2.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,600</small>
+        <ion-card>
+      <ion-row  *ngFor=" let cat of items">
+        <ion-col *ngFor="let product of cat.Product">
+          <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
+            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
+            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Card</ion-button>
+            <ion-button expand="full" (click)="selectFabric(product)"  color="medium">select for stitching</ion-button>
         </ion-col>
       </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/3.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/4.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,600</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/5.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,285</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/6.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,285</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/7.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,285</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/8.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,285</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/9.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,443</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/10.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,443</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/11.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,443</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/12.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,443</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/13.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,105</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/14.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,105</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/15.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,105</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/16.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,105</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/17.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,105</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/18.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,150</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/19.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,150</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/20.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,150</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/21.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,150</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/22.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 3,150</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/23.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/summer/24.jpg" alt="" class="image-container">
-          <ion-label>Alkaram Summer Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-      </ion-row>
+    </ion-card> 
     </ion-grid>
-
   </div>
 
-  <div [ngSwitch]="galleryType" class="grid1">
-
+  <div [ngSwitch]="galleryType" class="grid">
     <ion-grid *ngSwitchCase="'winter'">
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/1.JPG" alt="" class="image-container">
-          <ion-label>Faisla Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/2.JPG" alt="" class="image-container">
-          <ion-label>Faisal Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
+        <ion-card>
+      <ion-row  *ngFor=" let cat of items">
+        <ion-col *ngFor="let product of cat.Product2">
+          <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
+            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
+            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Card</ion-button>
+            <ion-button expand="full" (click)="selectFabric(product)"  color="medium">select for stitching</ion-button>
         </ion-col>
       </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/3.JPG" alt="" class="image-container">
-          <ion-label>Faisla Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/4.JPG" alt="" class="image-container">
-          <ion-label>Faisal Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/5.JPG" alt="" class="image-container">
-          <ion-label>Faisla Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/6.JPG" alt="" class="image-container">
-          <ion-label>Faisal Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/7.JPG" alt="" class="image-container">
-          <ion-label>Faisla Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/8.JPG" alt="" class="image-container">
-          <ion-label>Faisal Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/9.JPG" alt="" class="image-container">
-          <ion-label>Faisla Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-        <ion-col col-6>
-          <img src="assets/fabric/shalwarkameez/winter/10.jpg" alt="" class="image-container">
-          <ion-label>Faisal Winter Fabric</ion-label><br />
-          <small>PKR 2,600</small>
-        </ion-col>
-      </ion-row>
-
+    </ion-card>
     </ion-grid>
-
   </div>
+
 
 </ion-content>
