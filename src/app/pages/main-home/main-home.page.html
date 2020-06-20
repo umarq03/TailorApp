@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title class="main-title">Home</ion-title>
   </ion-toolbar>
@@ -9,10 +9,13 @@
 
 <ion-content>
   <div>
-    <img src="assets/1.png" class="image">
+    <img src="assets/mainimage.jpg" class="image">
   </div>
-  <section class="title2">
-    <ion-title class="title-font">TAILOR SHOP</ion-title>
+  <section>
+      <img src="assets/00.jpg" alt="mainlogo" class="logo"> 
+      <h1 class="title2" *ngFor="let setting of (titleSetting | async) ">{{setting.title}}</h1>
+    <span class="civil" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle1}}</span>
+    <span class="custom" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle2}}</span>
   </section>
 
   <ion-grid>
@@ -43,12 +46,20 @@
       <ion-col col-6>
         <ion-card class="order" [routerLink]="['/pricelist']">
           <ion-icon name="list-outline" style="color:#674172;"></ion-icon>
-          <h4>PriceList</h4>
+          <h4>RateList</h4>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-card >
+      <ion-card-content class="connStatus" >
+        Your ConnectionStatus: {{ networkStatus && networkStatus.connected ? 'Online' : 'Offline'}}
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
+</ion-footer>
+
+

@@ -1,52 +1,79 @@
 <ion-app>
-  <ion-router-outlet id="main"></ion-router-outlet>
+  <ion-router-outlet id="mainApp"></ion-router-outlet>
 </ion-app>
-<ion-menu side="start"  menuId="first" content-id="main" class="startmenu">
+<ion-menu side="start" menuId="first" content-id="mainApp" class="startmenu" >
   <ion-header>
-    <ion-toolbar style="--background:#674172; color: white;">
+    <ion-toolbar color="medium">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
+    <ion-toolbar>
+      <ion-card-content>yourEmail:{{userEmail}}</ion-card-content>
+    </ion-toolbar>
   </ion-header>
-  <ion-content>
+  <ion-content color="light">
     <ion-list>
-      <ion-menu-toggle>
-        <ion-item [routerLink]="['/main-home']">
+      <ion-menu-toggle autoHide="true">
+        <ion-item [routerLink]="['/main-home']" color="light">
           <ion-icon name="home-outline"></ion-icon>
           Home
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle>
         <ion-item [routerLink]="['/admin-database']">
-          <ion-icon name="book-outline"></ion-icon>
+          <ion-icon name="book-outline"></ion-icon> 
           AdminPanel
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item>
+      <ion-menu-toggle autoHide="true">
+        <ion-item [routerLink]="['/categories']">
+          <ion-icon name="body-outline"></ion-icon>
+          Measurements
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="true">
+        <ion-item [routerLink]="['/designs']" color="light">
+          <ion-icon name="albums-outline"></ion-icon>
+          Designs
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="true">
+        <ion-item [routerLink]="['/fabrics']">
+          <ion-icon name="grid-outline"></ion-icon>
+          Fabrics
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="true">
+        <ion-item [routerLink]="['/pricelist']" color="light">
+          <ion-icon name="list-outline"></ion-icon>
+          RateList
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="true">
+        <ion-item (click)="sendShare()">
           <ion-icon name="share-social-outline"></ion-icon>
           Share
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item>
+      <ion-menu-toggle autoHide="true">
+        <ion-item (click)="help()" color="light">
           <ion-icon name="help-circle-outline"></ion-icon>
           Help
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="lock-closed-outline"></ion-icon>
-          Privacy Policy
+      <ion-menu-toggle autoHide="true">
+        <ion-item (click)="aboutPage()">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          About
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="videocam-outline"></ion-icon>
-          Demo
+      <ion-menu-toggle autoHide="true">
+        <ion-item (click)="gotosetting()" color="light">
+          <ion-icon name="settings-outline"></ion-icon>
+          Settings
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
-        <ion-item (click)="logOut()">
+      <ion-menu-toggle autoHide="true">
+        <ion-item (click)="logOut()" color="light">
           <ion-icon name="log-out-outline"></ion-icon>
           Sign Out
         </ion-item>

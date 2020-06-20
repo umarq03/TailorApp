@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SKameezPageRoutingModule } from './skameez-routing.module';
 
 import { SKameezPage } from './skameez.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SKameezPage } from './skameez.page';
     ReactiveFormsModule,
     SKameezPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [SKameezPage]
 })
 export class SKameezPageModule {}

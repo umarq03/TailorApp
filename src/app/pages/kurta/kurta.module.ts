@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { KurtaPageRoutingModule } from './kurta-routing.module';
 
 import { KurtaPage } from './kurta.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { KurtaPage } from './kurta.page';
     IonicModule,
     KurtaPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [KurtaPage]
 })
 export class KurtaPageModule {}

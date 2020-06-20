@@ -4,60 +4,98 @@
       <ion-back-button defaultHref="fabrics"></ion-back-button>
     </ion-buttons>
     <ion-title>S.K Fab</ion-title>
-
-    <ion-buttons slot="end">
-        <!-- <ion-badge *ngIf="cart.length > 0">{{cart.length}}</ion-badge> -->
-        <div>{{cartItemCount | async}}</div>
-        <ion-button (click)="openCart()" #cart>
-          <ion-icon name="cart" slot="icon-only"></ion-icon>
-          </ion-button>
-      </ion-buttons>
-      
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding style="--background: whitesmoke;">
+<ion-content class="ion-padding">
 
-  <ion-toolbar>
-    <ion-segment color="primary" (ionChange)="segmentChanged($event)" [(ngModel)]="galleryType">
-      <ion-segment-button value="summer" checked>
-        <ion-label>Summer</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="winter">
-        <ion-label>Winter</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+  <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)" scrollable>
+    <ion-segment-button value="summer" checked>
+      <ion-label>Summer</ion-label>
+      <ion-icon name="sunny-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="winter">
+      <ion-label>Winter</ion-label>
+      <ion-icon name="snow-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
 
-  <div [ngSwitch]="galleryType" class="grid">
-    <ion-grid *ngSwitchCase="'summer'">
-        <ion-card>
-      <ion-row  *ngFor=" let cat of items">
-        <ion-col *ngFor="let product of cat.Product">
-          <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
-            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
-            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Card</ion-button>
-            <ion-button expand="full" (click)="selectFabric(product)"  color="medium">select for stitching</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card> 
-    </ion-grid>
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'summer'">
+      <ion-spinner *ngIf="searching || (sksummer | async) == 0"></ion-spinner>
+      <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let summ of sksummer | async">
+
+          <ion-card>
+            <ion-buttons>
+              <ion-button (click)="updateSummer(summ.id, summ.fabname, summ.price, summ.meter, summ.discount, summ.stock)">
+                <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button (click)="deleteSummer(summ)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-card-header>
+              <ion-card-title>
+                {{summ.fabname}}
+              </ion-card-title>
+              <ion-card-content *ngIf="summ.imageSummer">
+                  <ion-fab>
+                    <ion-fab-button>
+                      {{summ.discount}}
+                    </ion-fab-button>
+                    </ion-fab>
+                <img src="{{summ.imageSummer}}" alt="" />
+              </ion-card-content>
+              <ion-card-title color="danger">{{summ.stock}}</ion-card-title> <br />
+              {{summ.meter}}<br />
+              {{summ.price | currency:'Rs'}}
+            </ion-card-header>
+            <ion-button expand="block" fill="outline" color="medium">select for stitching</ion-button>
+          </ion-card>
+
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div *ngSwitchCase="'winter'">
+        <ion-spinner *ngIf="searching || (skwinter | async) == 0"></ion-spinner>
+        <ion-slides [options]="sliderConfig">
+          <ion-slide *ngFor="let win of skwinter | async">
+  
+            <ion-card>
+              <ion-buttons>
+                <ion-button (click)="updateWinter(win.id, win.Wfabname, win.Wprice, win.Wmeter, win.Wdiscount, win.Wstock)">
+                  <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+                <ion-button (click)="deleteWinter(win)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-card-header>
+                <ion-card-title>
+                  {{win.Wfabname}}
+                </ion-card-title>
+                <ion-card-content *ngIf="win.imageWinter">
+                  <ion-fab>
+                    {{win.Wdiscount}}
+                  </ion-fab>
+                  <img src="{{win.imageWinter}}" alt="" />
+                </ion-card-content>
+                <ion-card-title color="danger">{{win.Wstock}}</ion-card-title> <br />
+                {{win.Wmeter}}<br />
+                {{win.Wprice | currency:'Rs'}}
+              </ion-card-header>
+              <ion-button expand="block" fill="outline" color="medium">select for stitching</ion-button>
+            </ion-card>
+  
+          </ion-slide>
+        </ion-slides>
+     
+    </div>
   </div>
 
-  <div [ngSwitch]="galleryType" class="grid">
-    <ion-grid *ngSwitchCase="'winter'">
-        <ion-card>
-      <ion-row  *ngFor=" let cat of items">
-        <ion-col *ngFor="let product of cat.Product2">
-          <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
-            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
-            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Card</ion-button>
-            <ion-button expand="full" (click)="selectFabric(product)"  color="medium">select for stitching</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    </ion-grid>
-  </div>
+
 
 
 </ion-content>

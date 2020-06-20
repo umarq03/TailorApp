@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { KurtadatabasePage } from './kurtadatabase.page';
+import { KurtadatabasePageRoutingModule } from './kurtadatabase-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    KurtadatabasePageRoutingModule
   ],
   declarations: [KurtadatabasePage],
   entryComponents: [KurtadatabasePage]

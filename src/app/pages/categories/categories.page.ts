@@ -1,31 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { MenuController, PopoverController } from '@ionic/angular'
-import { PopoverComponent } from 'src/app/popover/popover.component';
+import {Plugins, PluginListenerHandle, NetworkStatus} from '@capacitor/core' 
+const { Network } = Plugins;
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.page.html',
   styleUrls: ['./categories.page.scss'],
 })
-export class CategoriesPage implements OnInit {
-
+export class CategoriesPage implements OnInit, OnDestroy {
+  networkStatus: NetworkStatus;
+  networkListener: PluginListenerHandle;
   constructor( private menu: MenuController, private popoverCtrl: PopoverController) { 
 
-    this.menu.swipeGesture(false);
+    this.menu.swipeGesture(true);
   }
  
   
 
-  ngOnInit() {
-    
+  async ngOnInit() {
+    this.networkListener = Network.addListener('networkStatusChange', status => {
+      console.log('Network Status Changed!',status);
+      this.networkStatus = status;
+    },
+    );
+    this.networkStatus = await Network.getStatus();
+   
   }
 
-  async optionsPopover(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverComponent,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
+  ngOnDestroy(): void{
+    this.networkListener.remove();
   }
+
+ 
 
 }

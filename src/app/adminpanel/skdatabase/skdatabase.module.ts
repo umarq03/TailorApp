@@ -13,7 +13,7 @@ import { SkdatabasePageRoutingModule } from './skdatabase-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SkdatabasePageRoutingModule
+    SkdatabasePageRoutingModule,
   ],
   declarations: [SkdatabasePage],
   entryComponents: [SkdatabasePage]

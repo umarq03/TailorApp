@@ -14,6 +14,7 @@ import { PantdatabasePageModule } from '../pantdatabase/pantdatabase.module';
 import { ShirtdatabasePageModule } from '../shirtdatabase/shirtdatabase.module';
 import { KurtadatabasePageModule } from '../kurtadatabase/kurtadatabase.module';
 import { CoatdatabasePageModule } from '../coatdatabase/coatdatabase.module';
+import { WcoatdatabasePageModule } from '../wcoatdatabase/wcoatdatabase.module';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { CoatdatabasePageModule } from '../coatdatabase/coatdatabase.module';
     PantdatabasePageModule,
     ShirtdatabasePageModule,
     KurtadatabasePageModule,
-    CoatdatabasePageModule
+    CoatdatabasePageModule,
+    WcoatdatabasePageModule
   ],
   declarations: [AdminDatabasePage]
 })

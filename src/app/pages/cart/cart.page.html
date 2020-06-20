@@ -25,4 +25,7 @@
 <div class="checkoutbtn">
   <ion-button (click)="checkout()" color="danger" expand="full" fill="solid">CheckOut</ion-button>
 </div>
+<div *ngFor="let k of items">
+  <p>{{k.name}}</p>
+</div>
 </ion-content>

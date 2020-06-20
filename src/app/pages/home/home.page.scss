@@ -1,26 +1,35 @@
-ion-slide{
-
-    padding: 80px 20px;
-    display: block;
-    h1{
-
-        font-size: 36px;
-        font-weight: bold;
-        
-    }
-    p{
-
-        font-size: 18px;
-        color: #999;
+:host{
+    ion-content{
+        --background: url('../../../assets/mainimage.jpg') no-repeat center center / cover;
+        opacity: 1;
+        position: fixed;
     }
 }
-.slide-one-img{
-
-    height: 150px;
-    width: 150px;
+img{
     border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    display: block;
+    margin-top: 60px;
+    opacity: 0.6;
+}
+#container{
+    display: block;
+    margin: auto;
+    padding: 20px 50px;
+    text-align: center;
+    position: relative;
+    
 }
 
-#container{
-    padding: 10px;
+h1{
+    font-size: 28px;
+    color: white;
+    text-transform: capitalize;
+}
+p{
+    text-align: justify;
+    font-size: 20px;
+    color: whitesmoke;
 }

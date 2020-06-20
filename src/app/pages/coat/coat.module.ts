@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CoatPageRoutingModule } from './coat-routing.module';
 
 import { CoatPage } from './coat.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { CoatPage } from './coat.page';
     IonicModule,
     CoatPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [CoatPage]
 })
 export class CoatPageModule {}

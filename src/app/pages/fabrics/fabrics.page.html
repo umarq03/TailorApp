@@ -5,117 +5,122 @@
     </ion-buttons>
     <ion-title>Fabrics</ion-title>
     <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-<div>
-  <ion-card class="uppercards" style="--background:white;" padding>
-    <ion-slides pager="true" [options]="sliderOpts">
-      <ion-slide>
-        <img src="assets/fabric/3.jpg" alt="" class="upperimages">
-      </ion-slide>
+  <div>
+    <ion-card class="uppercards" style="--background:white;" padding>
+      <ion-slides pager="true" [options]="sliderOpts">
+        <ion-slide>
+          <img src="assets/fabric/3.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/4.jpg" alt="" class="upperimages">
-      </ion-slide>
+        <ion-slide>
+          <img src="assets/fabric/4.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/5.jpg" alt="" class="upperimages">
-      </ion-slide>
+        <ion-slide>
+          <img src="assets/fabric/5.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/6.jpg" alt="" class="upperimages">
-      </ion-slide>
+        <ion-slide>
+          <img src="assets/fabric/6.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/7.jpg" alt="" class="upperimages">
-      </ion-slide>
+        <ion-slide>
+          <img src="assets/fabric/7.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/8.jpg" alt="" class="upperimages">
-      </ion-slide>
+        <ion-slide>
+          <img src="assets/fabric/8.jpg" alt="" class="upperimages">
+        </ion-slide>
 
-      <ion-slide>
-        <img src="assets/fabric/9.jpg" alt="" class="upperimages">
-      </ion-slide>
-    </ion-slides>
-   
-    <ion-card-header>
-      <ion-card-title>Fabrics Collection</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <h4>Hi there,</h4>We Have Every Quality Of Unstitched Menswear Fabrics Of Summer And Winter Collections
-    </ion-card-content>
-  </ion-card>
-</div>
+        <ion-slide>
+          <img src="assets/fabric/9.jpg" alt="" class="upperimages">
+        </ion-slide>
+      </ion-slides>
 
-<ion-grid>
-  <ion-row>
-    <ion-col col-6>
-        <ion-card class="fabric" (click)="skfab()" style="--background:white;" class="skfab">
-          <img src="assets/sk2logo.jpg" alt="" style="width: 70px; height:70px;">
-        </ion-card>
-    </ion-col>
+      <ion-card-header>
+        <ion-card-title>Fabrics Collection</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h4>Hi there,</h4>We Have Every Quality Of Unstitched Menswear Fabrics Of Summer And Winter Collections
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-    <ion-col col-6>
-      <ion-card class="fabric" style="--background:white;" class="skfab">
-        <img src="assets/pant.jpg" alt="" style="width: 70px; height:70px;">
-      </ion-card>
-  </ion-col>
-  </ion-row>
+  <ion-list>
+    <ion-item [routerLink]="['/skfab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/4.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>SHALWAR KAMEEZ</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
 
-  <ion-row>
-    <ion-col col-6>
-        <ion-card class="fabric" style="--background: white;" class="skfab">
-          <img src="assets/shirt.jpg" alt="" style="width: 70px; height:70px;">
-        </ion-card>
-    </ion-col>
+    <ion-item [routerLink]="['/pantfab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/5.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>PANT</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
 
-    <ion-col col-6>
-      <ion-card class="fabric" style="--background:white;" class="skfab">
-        <img src="assets/coat.jpg" alt="" style="width: 70px; height:70px;">
-      </ion-card>
-  </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col col-6>
-        <ion-card class="fabric" style="--background:white;" class="skfab">
-          <img src="assets/waistcoat.jpg" alt="" style="width: 70px; height:70px;">
-        </ion-card>
-    </ion-col>
-
-    <ion-col col-6>
-      <ion-card class="fabric" style="--background:white;" class="skfab">
-        <img src="assets/twopiece.jpg" alt="" style="width: 70px; height:70px;">
-      </ion-card>
-  </ion-col>
-</ion-row>
-</ion-grid>
+    <ion-item [routerLink]="['/shirtfab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/6.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>SHIRT</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
+    <!-- // Adding a comment here -->
+    <ion-item [routerLink]="['/coatfab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/7.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>COAT</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
+    <!-- // Adding a comment here -->
+    <ion-item [routerLink]="['/waistcoatfab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/8.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>WAIST-COAT</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
+    <!--this is a new comment   -->
+    <ion-item [routerLink]="['/kurtafab']">
+      <ion-avatar slot="start">
+        <img src="assets/fabric/3.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h3>KURTA</h3>
+      </ion-label>
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-tabs id="content2" root="tabs">
-
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button [routerLink]="['/main-home']">
-          <ion-icon name="home-outline"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-tab-button>
-
-
-        <ion-tab-button [routerLink]="['/about']">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-          <ion-label>About</ion-label>
-        </ion-tab-button>
-
-      
-
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-card>
+      <ion-card-content class="connStatus">
+        Your ConnectionStatus: {{ networkStatus && networkStatus.connected ? 'Online' : 'Offline'}}
+      </ion-card-content>
+    </ion-card>
   </ion-toolbar>
 </ion-footer>

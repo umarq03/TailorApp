@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PantPageRoutingModule } from './pant-routing.module';
 
 import { PantPage } from './pant.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { PantPage } from './pant.page';
     IonicModule,
     PantPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [PantPage]
 })
 export class PantPageModule {}

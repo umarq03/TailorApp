@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-list>
+    <ion-item button [routerLink]="['/title-setting', setting.id]" *ngFor="let setting of (titleSetting | async) "
+      color="light">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Change shop title and subtitle</ion-label>
+    </ion-item>
+    <ion-item button [routerLink]="['/starter-setting', setting.id]" *ngFor="let setting of (starterSetting | async) ">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Change starter title and message</ion-label>
+    </ion-item>
+    <ion-item button [routerLink]="['/email-setting', setting.id]" *ngFor="let setting of (emailSetting | async) "
+      color="light">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Change helping/email</ion-label>
+    </ion-item>
+    <ion-item button [routerLink]="['/ratelist-setting', setting.id]" *ngFor="let setting of (rateList | async) ">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Change rateList price</ion-label>
+    </ion-item>
+    <ion-item button [routerLink]="['/about-setting', setting.id]" *ngFor="let setting of (aboutSetting | async) ">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Change about setting</ion-label>
+    </ion-item>
+    <ion-item (click)="addfabrics()">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+      <ion-label>Add Fabrics</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

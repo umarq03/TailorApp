@@ -1,35 +1,135 @@
 <ion-header>
   <ion-toolbar color="medium">
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="categories"></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="categories"></ion-back-button>
+    </ion-buttons>
     <ion-title>Shirt</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-content>If you want to buy fabric, then tap the button and choose clothe Or skip it!
+    </ion-card-content>
+    <ion-button expand="full" fill="clear" color="medium" (click)="getshirtfab()">
+      <ion-icon name="play-outline" slot="end"></ion-icon>
+    </ion-button>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>Choose design </ion-card-content>
+    <ion-button expand="full" fill="clear" color="medium" (click)="getshirtdesigns()">
+      <ion-icon name="play-outline" slot="end"></ion-icon>
+    </ion-button>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="idea.fullname" placeholder="FullName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="tel" [(ngModel)]="idea.phonenumber" placeholder="PhoneNumber(Enter correct #)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="idea.address" placeholder="Address"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/1.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.lambai" placeholder="LAMBAI(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/2.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.chatti" placeholder="CHATTI(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/3.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.kamar" placeholder="KAMAR(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/4.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.teera" placeholder="TEERA(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/5.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.neck" placeholder="NECK(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/shirt/6.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.bazu" placeholder="BAZU(inches)"></ion-input>
+    </ion-item>
+    <ion-item class="label">
+      PREFERENCES
+    </ion-item>
+    <ion-item *ngFor="let fabric of shirt">
+      <ion-label>SELECT FABRIC</ion-label>
+      <ion-select [(ngModel)]="idea.fabric" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="{{fabric.name}}{{fabric.price | currency:'Rs'}}">
+          {{fabric.name}}-{{fabric.price | currency: 'Rs'}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngFor="let design of shirtdesigns">
+      <ion-label>SELECT DESIGN</ion-label>
+      <ion-select [(ngModel)]="idea.design" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="{{design.name}}{{design.price | currency:'Rs'}}">
+          {{design.name}}-{{design.price | currency: 'Rs'}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>BAZU</ion-label>
+      <ion-select [(ngModel)]="idea.bazugolkaff" value="gol" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="gol">GOL</ion-select-option>
+        <ion-select-option value="kaff">KAFF</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>COLLAR</ion-label>
+      <ion-select [(ngModel)]="idea.collar" value="gol" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="collarcut">COLLAR CUT</ion-select-option>
+        <ion-select-option value="fullbain">FULL BAIN</ion-select-option>
+        <ion-select-option value="englishbann">ENGLISH BANN</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let total of shirt">
+      <ion-item>
+        <h2>Your Total</h2>
+      </ion-item>
+      <ion-item>
+      Fabric: <span slot="end">{{total.price | currency: 'Rs'}}</span>
+    </ion-item>
+    <ion-item>
+        Stitching: <span slot="end">{{total.stitching | currency: 'Rs'}}</span>
+      </ion-item>
+      <ion-item>
+          Total: <span slot="end">{{ getTotal() | currency:'Rs'}}</span>
+        </ion-item>
+    </ion-card>
+
+  <ion-card *ngIf="!idea.id">
+    <div>
+      <ion-button (click)="addDatabase()" color="success" expand="block" fill="outline" [disabled]="disablebtn">
+        Submit
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-tabs id="content2" root="tabs">
-
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button [routerLink]="['/main-home']">
-          <ion-icon name="home-outline"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-tab-button>
-
-      
-
-        <ion-tab-button [routerLink]="['/about']">
-          <ion-icon name="alert-circle-outline"></ion-icon>
-          <ion-label>About</ion-label>
-        </ion-tab-button>
-
-    
-
-      </ion-tab-bar>
-    </ion-tabs>
-  </ion-toolbar>
+<ion-footer *ngIf="idea.id">
+  <ion-row no-padding text-center>
+    <ion-col size="6">
+      <ion-button expand="block" fill="outline" color="danger" (click)="deleteIdea()">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        Delete
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" fill="solid" color="success" (click)="updateIdea()">
+        <ion-icon name="save" slot="start"></ion-icon>
+        Update
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-footer>

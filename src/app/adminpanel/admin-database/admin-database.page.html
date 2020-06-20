@@ -2,13 +2,13 @@
   <ion-toolbar>
     <ion-title>Shop Database</ion-title>
     <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <super-tabs>
-  <super-tabs-toolbar slot="top" color="medium" style="color:white;"
+  <super-tabs-toolbar slot="top" color="medium" style="color:whitesmoke;"
   scrollable="true" scrollablePadding="false" showIndicator>
     <super-tab-button>
       <ion-icon name="newspaper-outline"></ion-icon>
@@ -29,6 +29,10 @@
     <super-tab-button>
       <ion-icon name="newspaper-outline"></ion-icon>
       <ion-label>CoatData</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+      <ion-icon name="newspaper-outline"></ion-icon>
+      <ion-label>WcData</ion-label>
     </super-tab-button>
   </super-tabs-toolbar>
 
@@ -56,6 +60,11 @@
     <super-tab>
       <ion-content>
         <ion-nav [root]="coatDatabase"></ion-nav>
+      </ion-content>
+    </super-tab>
+    <super-tab>
+      <ion-content>
+        <ion-nav [root]="wcoatDatabase"></ion-nav>
       </ion-content>
     </super-tab>
   </super-tabs-container>

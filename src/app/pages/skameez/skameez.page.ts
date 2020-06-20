@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
-  AlertController, ToastController, MenuController,
-  LoadingController, PopoverController, NavController, NavParams
+  ToastController, MenuController,
+  LoadingController, PopoverController, NavController, NavParams, AlertController
 } from '@ionic/angular';
-import { analytics } from 'firebase';
-import { PopoverComponent } from 'src/app/popover/popover.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { DatabaseService, Idea } from 'src/app/services/database.service';
-
+import { BehaviorSubject } from 'rxjs';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { SMS } from '@ionic-native/sms/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { Dialogs } from '@ionic-native/dialogs/ngx';
 @Component({
   selector: 'app-skameez',
   templateUrl: './skameez.page.html',
   styleUrls: ['./skameez.page.scss'],
 })
-export class SKameezPage implements OnInit {
-
+export class SKameezPage implements OnInit{
   skameez = [];
   kameezdesigns = [];
-
+  private cartItemCount = new BehaviorSubject(0);
+  disablebtn;
   idea: Idea = {
     fabric: '',
     design: '',
@@ -49,35 +51,45 @@ export class SKameezPage implements OnInit {
     private cartService: CartService,
     private database: DatabaseService,
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private androidPermissions: AndroidPermissions,
+    private sms: SMS,
+    private network: Network,
+    public dialog: Dialogs) {
 
-    this.menu.swipeGesture(false);
+    this.menu.swipeGesture(true);
+    this.network.onDisconnect().subscribe(()=>{
+      this.showToast('Network was disconnected!')
+    });
+    
+    this.network.onConnect().subscribe(()=>{
+
+      setTimeout(() => {
+        this.showToast('You got a '+''+this.network.type+'connection, woooho!');
+      });
+    });
   }
 
-
-  ngOnInit() {
+  ionviewDidEnter() {
+    this.disablebtn = false;
+  }
+  async ngOnInit() {
     this.skameez = this.cartService.getskameez();
     this.kameezdesigns = this.cartService.getkameezdesigns();
   }
   removeItem(product) {
     this.cartService.removeskamez(product);
   }
-
+  getacartItemCount() {
+    return this.cartItemCount;
+  }
   removedesigns(product) {
     this.cartService.removeskdesigns(product);
   }
 
   getTotal() {
-    return this.skameez.reduce((i, j) => i + j.price * j.amount, 0)
-  }
-
-  async optionsPopover(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverComponent,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
+    return this.skameez.reduce((i, j) => i + +j.price + +j.stitching, 0)
   }
 
   getskfab() {
@@ -107,27 +119,80 @@ export class SKameezPage implements OnInit {
     {
       loading.dismiss();
     }
-
   }
 
   async addDatabase() {
+    if (this.idea.fullname == "") {
+      this.showToast("Name is required!")
+    }
+    else if (this.idea.phonenumber == "") {
+      this.showToast("PhoneNumber is required!")
+    }
+    else if (this.idea.address == "") {
+      this.showToast("Address is required!")
+    }
+    else if (this.idea.lambai == "") {
+      this.showToast("Lambai is required!")
+    }
+    else if (this.idea.chatti == "") {
+      this.showToast("Chatti is required!")
+    }
+    else if (this.idea.teera == "") {
+      this.showToast("Teera is required!")
+    }
+    else if (this.idea.kameezbazu == "") {
+      this.showToast("KameezBazu is required!")
+    }
+    else if (this.idea.neck == "") {
+      this.showToast("Neck is required!")
+    }
+    else if (this.idea.kameezdaman == "") {
+      this.showToast("KameezDaman is required!")
+    }
+    else if (this.idea.shalwarlambai == "") {
+      this.showToast("ShalwarLambai is required!")
+    }
+    else if (this.idea.pancha == "") {
+      this.showToast("Pancha is required!")
+    }
+    else if (this.idea.daman == "") {
+      this.showToast("Daman is not select!")
+    }
+    else if (this.idea.pockets == "") {
+      this.showToast("Pockets is not select!")
+    }
+    else if (this.idea.collar == "") {
+      this.showToast("Collar/Bain is not select!")
+    }
+    else if (this.idea.bazu == "") {
+      this.showToast("Bazu is not select!")
+    }
+    else {
+      this.disablebtn = true;
+      this.database.addIdea(this.idea).then(() => {
+        this.loaddata();
+        this.router.navigateByUrl('/categories');
+        this.sendSMS();
+        this.presentAlert();
+      }, err => {
+        this.showToast('There was a problem adding your SKdata :(');
+      });
+    }
+    
+   
+  }
+  async loaddata(){
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
-      message: 'Sending Data...'
+      message: 'Sending Data...',
+      duration: 1500
     });
     await loading.present();
-
-    this.database.addIdea(this.idea).then(() => {
-      loading.dismiss();
-      this.showToast('Data Sent!');
-    }, err => {
-      this.showToast('There was a problem adding your SKdata :(');
-    });
   }
 
-  async deleteIdea() {
 
+  async deleteIdea() {
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
@@ -145,7 +210,6 @@ export class SKameezPage implements OnInit {
   }
 
   async updateIdea() {
-
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
@@ -168,9 +232,63 @@ export class SKameezPage implements OnInit {
       duration: 2000
     }).then(toast => toast.present());
   }
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Message',
+      message: 'Data Sent, After 10 minute you will receive confirmation message, Thank you!',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
+  checkSMSPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(
+      result => console.log('Has permission?', result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS)
+    );
+  }
+  requestSMSPermission() {
+    // tslint:disable-next-line: max-line-length
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.SEND_SMS, this.androidPermissions.PERMISSION.BROADCAST_SMS]);
+  }
+  sendSMS() {
+    this.checkSMSPermission();
+    this.send();
+    // CONFIGURATION
+    const options = {
+        replaceLineBreaks: false, // true to replace \n by a new line, false by default
+        android: {
+            intent: ''  // send SMS with the native android SMS messaging
+            // intent: '' // send SMS without opening any other app
+        }
+    };
+    // this.sms.send('03018761467', this.idea.fullname+' '+'skameez data had been added at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
+          this.sms.send('03018761467', this.idea.fullname+' '+'is send you skameez data at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
 
+    })
+    .catch(error => {
+      this.showToast('ErrorFailed: ' + error);
+    });
+  }
+  send() {
+    this.checkSMSPermission();
 
+  
+    // CONFIGURATION
+    const options = {
+        replaceLineBreaks: false, // true to replace \n by a new line, false by default
+        android: {
+            intent: ''  // send SMS with the native android SMS messaging
+            // intent: '' // send SMS without opening any other app
+        }
+    };
+    // this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'recently your S-kameez data has been successfully added, from TailorMate!',options).then(() => {
+   this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'your S-Kameez data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorMate!',options).then(() => {
 
+    })
+    .catch(error => {
+      this.showToast('ErrorFailed: ' + error);
+    });
+  }
 
 }

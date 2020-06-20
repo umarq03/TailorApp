@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title>Help</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        For any help please send us an email at.
+      </ion-card-title>
+      <ion-card-content>
+       <span (click)="sendEmail()" *ngFor="let setting of (emailSetting | async) ">{{setting.email}}</span>
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>

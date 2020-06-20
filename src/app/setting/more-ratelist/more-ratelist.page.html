@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="ratelist-setting"></ion-back-button>
+    </ion-buttons>
+    <ion-title>add rateList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Name:</ion-label>
+    <ion-input type="text" [(ngModel)]="idea.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Price:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.price"></ion-input>
+  </ion-item>
+  <div *ngIf="!idea.id">
+    <ion-button (click)="save()" color="success" expand="block" fill="outline" [disabled]="disablebtn">
+      Save
+      <ion-icon name="checkmark" slot="start"></ion-icon>
+    </ion-button>
+  </div>
+  <div *ngIf="idea.id">
+    <ion-row no-padding text-center>
+      <ion-col size="6">
+        <ion-button expand="block" fill="solid" color="success" (click)="updateIdea()">
+          <ion-icon name="save" slot="end"></ion-icon>
+          Update
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" fill="solid" color="medium" (click)="deleteIdea()">
+          <ion-icon name="trash-outline" slot="end"></ion-icon> Delete
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

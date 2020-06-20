@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-setting"></ion-back-button>
+    </ion-buttons>
+    <ion-title>aboutSettings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>
+      TitleName:
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="idea.title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Subtitle:
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="idea.subtitle"></ion-input>
+  </ion-item>
+  <ion-label class="msg">Message:</ion-label>
+  <textarea class="textarea" placeholder="Enter message..." cols="42" rows="6" [(ngModel)]="idea.message"></textarea>
+  <ion-item>
+    <ion-label>Prop Name:</ion-label>
+    <ion-input type="text" [(ngModel)]="idea.prop"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>PhoneNumber:</ion-label>
+    <ion-input type="tel" [(ngModel)]="idea.phonenumber"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Shop Timing:</ion-label>
+    <ion-input type="text" [(ngModel)]="idea.timing"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Location:</ion-label>
+    <ion-input type="text" [(ngModel)]="idea.location"></ion-input>
+  </ion-item>
+  <div *ngIf="!idea.id">
+      <ion-button (click)="save()" color="success" expand="block" fill="outline" [disabled]="disablebtn">
+        Save
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  <div *ngIf="idea.id">
+  <ion-row no-padding text-center>
+    <ion-col size="6">
+      <ion-button expand="block" fill="outline" color="success" (click)="updateIdea()">
+        <ion-icon name="save" slot="end"></ion-icon>
+        Update
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</div>
+</ion-content>

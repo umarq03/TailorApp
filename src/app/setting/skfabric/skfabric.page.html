@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="addfab"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Skfabric</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <h3>Add Summer Fabric</h3>
+    <ion-item>
+      <ion-label>FabName:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabname" placeholder="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file" name="inputFile" (change)="chooseFabricSummer($event)" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+      <ion-input type="text" [(ngModel)]="price" placeholder="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meter:</ion-label>
+      <ion-input type="text" [(ngModel)]="meter" placeholder="3.4/meter"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount in %:</ion-label>
+      <ion-input type="text" [(ngModel)]="discount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Availability:</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="stock">
+        <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
+        <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div>
+      <ion-button (click)="addsumm()" color="success" expand="block" fill="outline">
+        Add summer
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div>
+    <h3>Add Winter Fabric</h3>
+    <ion-item>
+      <ion-label>FabName:</ion-label>
+      <ion-input type="text" [(ngModel)]="Wfabname" placeholder="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file" name="inputFile" (change)="chooseFabricWinter($event)" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+      <ion-input type="text" [(ngModel)]="Wprice" placeholder="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meter:</ion-label>
+      <ion-input type="text" [(ngModel)]="Wmeter" placeholder="3.4/meter"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount in %:</ion-label>
+      <ion-input type="text" [(ngModel)]="Wdiscount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Availability:</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="Wstock">
+        <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
+        <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div>
+      <ion-button (click)="addwint()" color="primary" expand="block" fill="outline">
+        Add winter
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+
+</ion-content>

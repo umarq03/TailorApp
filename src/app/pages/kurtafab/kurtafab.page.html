@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="fabrics"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kurta Fab</ion-title>
+    <ion-buttons slot="end">
+      <div>{{cartItemCount | async}}</div>
+      <ion-button (click)="openCart()" #cart>
+        <ion-icon name="cart" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="grid">
+    <ion-grid>
+      <ion-card>
+        <ion-row *ngFor=" let cat of items">
+          <ion-col *ngFor="let product of cat.Product8">
+            <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
+            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
+            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Cart</ion-button>
+            <ion-button expand="full" (click)="selectFabric(product)" color="medium">Select For Stitching</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ShirtPageRoutingModule } from './shirt-routing.module';
 
 import { ShirtPage } from './shirt.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ShirtPage } from './shirt.page';
     IonicModule,
     ShirtPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [ShirtPage]
 })
 export class ShirtPageModule {}

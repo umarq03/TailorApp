@@ -1,26 +1,59 @@
 <ion-header>
-  <ion-toolbar style="--background:#674172; color: white;">
+  <ion-toolbar color="medium">
     <ion-title>About</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <img src="assets/mainpic.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title text-wrap *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.title}}
+      </ion-card-title>
+      <h6 *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.subtitle}}
+      </h6>
+    </ion-card-header>
+    <ion-card-content class="ion-text-justify" *ngFor="let setting of (aboutSetting | async) ">
+      {{setting.message}}
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-text-center">
+    <ion-item>
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.prop}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
+       {{setting.phonenumber}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
+       {{setting.timing}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.location}}
+      </ion-card-content>
+    </ion-item>
+  </div>
 
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-      <ion-tabs id="content2" root="tabs">
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button [routerLink]="['/main-home']">
-            <ion-icon name="home-outline"></ion-icon>
-            <ion-label>Home</ion-label>
-          </ion-tab-button>
-          
-          <ion-tab-button [routerLink]="['/about']">
-            <ion-icon name="alert-circle-sharp" style="color:#674172;"></ion-icon>
-            <ion-label style="color:#674172;">About</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-    </ion-toolbar>
-  </ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <p>{{fullname}}</p>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title>WaistcoatDesigns</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="designs"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="grid">
+    <ion-grid>
+      <ion-card>
+        <ion-row *ngFor=" let cat of waistcoatdesigns">
+          <ion-col *ngFor="let product of cat.Product12">
+            <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
+            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
+            <ion-button expand="full" (click)="selectFabric(product)" color="medium">select design</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-grid>
+  </div>
+</ion-content>

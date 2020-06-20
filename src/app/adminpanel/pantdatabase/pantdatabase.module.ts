@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { PantdatabasePage } from './pantdatabase.page';
+import { PantdatabasePageRoutingModule } from './pantdatabase-routing.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { PantdatabasePage } from './pantdatabase.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    PantdatabasePageRoutingModule
 
   ],
   declarations: [PantdatabasePage],

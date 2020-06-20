@@ -1,41 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import {Network} from '@ionic-native/network/ngx';
-import { ToastController } from '@ionic/angular';
-
-
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { ToastController, MenuController, NavController } from '@ionic/angular';
+import {Plugins, PluginListenerHandle, NetworkStatus} from '@capacitor/core' 
+const { Network } = Plugins;
+import { Observable } from 'rxjs';
+import { DatabaseService, titleSetting } from 'src/app/services/database.service';
+import { LoadingController } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-main-home',
   templateUrl: './main-home.page.html',
   styleUrls: ['./main-home.page.scss'],
 })
-export class MainHomePage implements OnInit {
+export class MainHomePage implements OnInit ,OnDestroy{
+ networkStatus: NetworkStatus;
+ networkListener: PluginListenerHandle;
+ private titleSetting: Observable<titleSetting[]>;
+ userEmail: string;
 
- 
-
-  constructor(public network: Network, private toastCtrl: ToastController) {   
-    this.network.onDisconnect().subscribe(() =>{
-      this.showToast('NetWork is Disconnected, Sorry!')
-    });
-    
-    this.network.onConnect().subscribe(() =>{
-      
-      this.showToast('NetWork is Connected, Enjoy'!)
-
-
-    });
+  constructor(private toastCtrl: ToastController, private menu: MenuController,
+    private database: DatabaseService, private loadingCtrl: LoadingController,
+    private authservice: AuthServiceService, private navCtrl: NavController) {   
+   this.menu.swipeGesture(true);
  }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.networkListener = Network.addListener('networkStatusChange', status => {
+      console.log('Network Status Changed!',status);
+      this.networkStatus = status;
+    },
+    );
+    this.networkStatus = await Network.getStatus();
+    this.titleSetting = this.database.getTitleSettings();
   }
 
-  showToast(msg) {
-    this.toastCtrl.create({
-      message: msg,
-      duration: 2000
-    }).then(toast => toast.present());
+  // ionViewWillEnter(){
+  //   this.loaddata();
+  // }
+  ionViewDidLoad(){
+    this.loaddata()
   }
-  
+
+  ngOnDestroy(): void{
+    this.networkListener.remove();
+  }
+  async loaddata(){
+    const loading = await this.loadingCtrl.create({
+      spinner: 'circles',
+      keyboardClose: true,
+      message: ''
+    });
+    await loading.present();
+    loading.dismiss();
+  }
+ 
 
 
 }

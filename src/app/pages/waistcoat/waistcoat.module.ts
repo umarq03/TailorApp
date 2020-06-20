@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { WaistcoatPageRoutingModule } from './waistcoat-routing.module';
 
 import { WaistcoatPage } from './waistcoat.page';
+import { SMS } from '@ionic-native/sms/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { WaistcoatPage } from './waistcoat.page';
     IonicModule,
     WaistcoatPageRoutingModule
   ],
+  providers:[SMS],
   declarations: [WaistcoatPage]
 })
 export class WaistcoatPageModule {}

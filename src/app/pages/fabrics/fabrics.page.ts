@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, PopoverController } from '@ionic/angular';
+import { MenuController, PopoverController, LoadingController } from '@ionic/angular';
 import { PopoverComponent } from 'src/app/popover/popover.component';
 import { Router } from '@angular/router';
-
+import {Plugins, PluginListenerHandle, NetworkStatus} from '@capacitor/core' 
+const { Network } = Plugins;
 @Component({
   selector: 'app-fabrics',
   templateUrl: './fabrics.page.html',
@@ -10,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class FabricsPage implements OnInit {
 
-  // images = ['3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg'];
+  networkStatus: NetworkStatus;
+  networkListener: PluginListenerHandle;
+  
   sliderOpts = {
 
     zoom: {maxRatio:3},
@@ -21,25 +24,39 @@ export class FabricsPage implements OnInit {
 
   };
 
-  constructor( private menu: MenuController,private popoverCtrl: PopoverController, private router: Router) { 
-    this.menu.swipeGesture(false);
+  constructor( private menu: MenuController,private popoverCtrl: PopoverController, private router: Router,
+    private loadingCtrl: LoadingController) { 
+    this.menu.swipeGesture(true);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.networkListener = Network.addListener('networkStatusChange', status => {
+      console.log('Network Status Changed!',status);
+      this.networkStatus = status;
+    },
+    );
+    this.networkStatus = await Network.getStatus();
+   
+  }
+  ionViewWillEnter(){
+    this.loaddata();
   }
 
+  ngOnDestroy(): void{
+    this.networkListener.remove();
+  }
   skfab(){
     this.router.navigate(['/skfab']);
   }
-
-
-  async optionsPopover(ev: any) {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverComponent,
-      event: ev,
-      translucent: true
+  async loaddata(){
+    const loading = await this.loadingCtrl.create({
+      spinner: 'circles',
+      keyboardClose: true,
+      message: ''
     });
-    return await popover.present();
+    await loading.present();
+    loading.dismiss();
   }
+
 
 }

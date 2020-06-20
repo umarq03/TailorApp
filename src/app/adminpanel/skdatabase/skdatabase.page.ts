@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { DatabaseService, Idea } from 'src/app/services/database.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-skdatabase',
   templateUrl: './skdatabase.page.html',
@@ -10,43 +11,85 @@ import { LoadingController } from '@ionic/angular';
 })
 export class SkdatabasePage implements OnInit {
   private skdata: Observable<Idea[]>;
-  public searchTerm: string = "";
   offset = 0;
   searching = false;
-
-  constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
+  public name: string;
+  public sk : string;
+  private about = [];
+  private fullname: string;
+  
+  constructor(private database: DatabaseService, private loadingCtrl: LoadingController, 
+    private router: Router, private navCtrl: NavController  ) {
+   }
 
   ngOnInit() {
     this.getDatabase();
-    this.ionViewDidEnter();
   }
+  searchTerm = '';
+  searchText = '';
+  
+  filterMe() {
+    console.log('searchterm', this.searchTerm);
+    this.searchText = '';
+    if (this.searchTerm != null) {
+      this.searchText = this.searchTerm.toLowerCase();
+    } else {
+      this.searchText = '';
+    }
 
-  async ionViewDidEnter() {
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      message: 'Loading Data...',
-      duration: 2500
-      
-    });
-    await loading.present();
-    this.getDatabase();
-  }
+    this.skdata = this.skdata.pipe(
+        map((reports: any[]) => reports.filter(p => {
+          if (p.fullname.toString().toLowerCase().indexOf(this.searchText) > -1) {return p; }
+        }))
+    );
+      }
 
-  async ionViewWillLoad() {
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      message: 'Loading Data...',
-      duration: 2500
-      
-    });
-    await loading.present();
-    this.getDatabase();
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   getDatabase() {
     this.searching = true;
     this.skdata = this.database.getIdeas();
     this.searching = false;
-     
+
+  }
+  getCart() {
+
+    return this.about;
+  }
+
+  // go(uid){
+
+  //   // this.router.navigate(['about', {name: this.name}]);;
+  //   // this.addProduct(sk);
+  //   // let navigateItem =  this.skdata[sk];
+  //   // this.router.navigate(['about', {'navigateItem': navigateItem}])
+  //   this.database.getIdea = uid;
+  //   this.router.navigate(['about'])
+  // }
+  go(fullname) {
+
+    this.router.navigate(['about', {fullname: this.fullname}])
+
+  //   let added = false;
+  //   for (let skdata of this.about) {
+
+  //     if (skdata.name === sk.name) {
+  //       skdata.amount += 1;
+  //       added = true;
+  //       break;
+  //     }
+  //   }
+  //   if (!added) {
+  //     this.about.push(sk);
+  //   }
+  //   this.about.push(sk);
+  //   this.router.navigate(['about'])
   }
 }

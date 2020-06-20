@@ -7,14 +7,16 @@
 
 .title2{
     position: relative;
-    bottom: 150px;
-    left: 80px;
-
+    bottom: 360px;
+    left: 110px;
+    color: white;
+    font-size: 50px;
+    text-transform: capitalize;
 }
 
 .row-one{
 
-    bottom: 70px;
+    bottom: 310px;
     position: relative;
 }
 .category{
@@ -28,11 +30,7 @@
     
 
 }
-// .category:active{
 
-//     background: black;
-//     color: white;
-// }
 .designs{
 
     height: 100px;
@@ -43,14 +41,9 @@
     }
 
 }
-// .designs:active{
-//     background: black;
-//     color: white;
 
-// }
 .row-two{
-
-    bottom: 20px;
+    bottom: 325px;
     position: relative;
 }
 .fabrics{
@@ -61,11 +54,7 @@
         font-size: 40px;
     }
 }
-// .fabrics:active{
 
-//     background: black;
-//     color: white;
-// }
 .order{
     height: 100px;
     text-align: center;
@@ -75,11 +64,7 @@
     }
 }
 
-.title-font{
 
-    color: white;
-    font-size: 30px;
-}
 .main-title{
     float: left;
 }
@@ -149,8 +134,32 @@ h4{
   
   }
   ion-content{
-      position: absolute;
+    --overflow: hidden;
   }
+.connStatus{
+    text-align: center;
+}
+.logo{
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    bottom: 300px;
+    opacity: 1;
+}
+.civil{
+    position: relative;
+    bottom: 370px;
+    left: 220px;
+    color: white;
+    text-transform: capitalize;
+}
+.custom{
+    position: relative;
+    bottom: 350px;
+    left: 120px;
+    color: white;
+    text-transform: capitalize;
+}
 
   
 
