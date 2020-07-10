@@ -16,13 +16,13 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
   templateUrl: './shirt.page.html',
   styleUrls: ['./shirt.page.scss'],
 })
-export class ShirtPage implements OnInit{
+export class ShirtPage implements OnInit {
   shirt = [];
   shirtdesigns = [];
   disablebtn;
   idea: Shirt = {
     fabric: '',
-    design:'',
+    design: '',
     fullname: '',
     phonenumber: '',
     address: '',
@@ -49,25 +49,20 @@ export class ShirtPage implements OnInit{
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private androidPermissions: AndroidPermissions,
-    private sms: SMS,
-    private network: Network,
-    public dialog: Dialogs) { 
-      this.network.onDisconnect().subscribe(()=>{
-        this.showToast('Network was disconnected!')
-      });
-      
-      this.network.onConnect().subscribe(()=>{
-  
-        setTimeout(() => {
-          this.showToast('You got a '+''+this.network.type+'connection, woooho!');
-        });
-      });
-    }
+    private sms: SMS) {
+
+  }
 
 
   async ngOnInit() {
     this.shirt = this.cartService.getshirt();
     this.shirtdesigns = this.cartService.getshirtdesigns();
+  }
+  removeItem(product) {
+    this.cartService.removeshirt(product);
+  }
+  removedesigns(product) {
+    this.cartService.removeshirtdesigns(product);
   }
   getTotal() {
     return this.shirt.reduce((i, j) => i + +j.price + +j.stitching, 0)
@@ -104,62 +99,63 @@ export class ShirtPage implements OnInit{
   }
   async addDatabase() {
     if (this.idea.fullname == "") {
-      this.showToast("Name is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Name is required!')
     }
     else if (this.idea.phonenumber == "") {
-      this.showToast("PhoneNumber is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> PhoneNumber is required!')
     }
     else if (this.idea.address == "") {
-      this.showToast("Address is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Address is required!')
     }
     else if (this.idea.lambai == "") {
-      this.showToast("Lambai is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Lambai is required!')
     }
     else if (this.idea.chatti == "") {
-      this.showToast("Chatti is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Chatti is required!')
     }
     else if (this.idea.kamar == "") {
-      this.showToast("Kamar is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Kamar is required!')
     }
     else if (this.idea.teera == "") {
-      this.showToast("Teera is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Teera is required!')
     }
     else if (this.idea.neck == "") {
-      this.showToast("Neck is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Neck is required!')
     }
     else if (this.idea.bazu == "") {
-      this.showToast("Bazu is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Bazu is required!')
     }
     else if (this.idea.bazugolkaff == "") {
-      this.showToast("Bazu is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Bazu is not select!')
     }
     else if (this.idea.collar == "") {
-      this.showToast("Collar is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Collar is not select!')
     } else {
       this.disablebtn = true;
+      this.loaddata();
       this.database.addShirt(this.idea).then(() => {
-        this.loaddata();
         this.sendSMS();
         this.router.navigateByUrl('/categories');
         this.presentAlert();
       }, err => {
         this.showToast('There was a problem adding your Shirtdata :(');
       });
-   
+
     }
-   
+
   }
-  async loaddata(){
-    const loading = await this.loadingCtrl.create({
+  async loaddata() {
+    const loadingSK = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
-      message: 'Sending Data...',
-      duration: 1500
+      message: 'Sending Data...'
     });
-    await loading.present();
-    
+    await loadingSK.present();
+    {
+      loadingSK.dismiss();
+    }
   }
- 
+
   async deleteIdea() {
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
@@ -171,7 +167,7 @@ export class ShirtPage implements OnInit{
     this.database.deleteShirt(this.idea.id).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Shirtdata deleted');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Shirtdata deleted');
     }, err => {
       this.showToast('There was a problem deleting your Shirtdata :(');
     });
@@ -187,7 +183,7 @@ export class ShirtPage implements OnInit{
     this.database.updateShirt(this.idea).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Shirtdata updated');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Shirtdata updated');
     }, err => {
       this.showToast('There was a problem updating your Shirtdata :(');
     });
@@ -196,7 +192,15 @@ export class ShirtPage implements OnInit{
   showToast(msg) {
     this.toastCtrl.create({
       message: msg,
-      duration: 2000
+      duration: 2000,
+      color: 'danger'
+    }).then(toast => toast.present());
+  }
+  showToast1(msg) {
+    this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      color: 'success'
     }).then(toast => toast.present());
   }
   async presentAlert() {
@@ -223,39 +227,39 @@ export class ShirtPage implements OnInit{
     this.send();
     // CONFIGURATION
     const options = {
-        replaceLineBreaks: false, // true to replace \n by a new line, false by default
-        android: {
-            intent: ''  // send SMS with the native android SMS messaging
-            // intent: '' // send SMS without opening any other app
-        }
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: ''  // send SMS with the native android SMS messaging
+        // intent: '' // send SMS without opening any other app
+      }
     };
     // this.sms.send('03018761467', this.idea.fullname+' '+'shirt data had been added at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
-          this.sms.send('03018761467', this.idea.fullname+' '+'is send you shirt data at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
+    this.sms.send('03018761467', this.idea.fullname + ' ' + 'is send you shirt data at TailorShop.' + ' ' + 'customer phonenumber is :' + ' ' + this.idea.phonenumber + ' ' + 'at' + this.idea.creaditAt, options).then(() => {
 
     })
-    .catch(error => {
-      this.showToast('ErrorFailed: ' + error);
-    });
+      .catch(error => {
+        this.showToast('ErrorFailed: ' + error);
+      });
   }
   send() {
     this.checkSMSPermission();
 
-  
+
     // CONFIGURATION
     const options = {
-        replaceLineBreaks: false, // true to replace \n by a new line, false by default
-        android: {
-            intent: ''  // send SMS with the native android SMS messaging
-            // intent: '' // send SMS without opening any other app
-        }
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: ''  // send SMS with the native android SMS messaging
+        // intent: '' // send SMS without opening any other app
+      }
     };
     // this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'recently your shirt data has been successfully added, from TailorMate!',options).then(() => {
-   this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'your shirt data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorMate!',options).then(() => {
+    this.sms.send(String(this.idea.phonenumber), this.idea.fullname + ' ' + 'your shirt data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorShop!', options).then(() => {
 
     })
-    .catch(error => {
-      this.showToast('ErrorFailed: ' + error);
-    });
+      .catch(error => {
+        this.showToast('ErrorFailed: ' + error);
+      });
   }
 
 }

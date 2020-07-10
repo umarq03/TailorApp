@@ -1,24 +1,44 @@
 <ion-header>
-  <ion-toolbar color="medium">
-    <ion-title>kameezdesigns</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="designs"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <div class="grid">
-    <ion-grid>
-      <ion-card>
-        <ion-row *ngFor=" let cat of kameezdesigns">
-          <ion-col *ngFor="let product of cat.Product3">
-            <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
-            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
-            <ion-button expand="full" (click)="selectFabric(product)" color="medium">select design</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-grid>
-  </div>
-</ion-content>
+    <ion-toolbar color="secondary">
+      <ion-title>SkDesigns</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="designs"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <ion-spinner name="circles" *ngIf="searching || (skdesign | async) == 0"></ion-spinner>
+        <ion-button color="medium" fill="clear" style="position: absolute;top: 50%;left: 16px;font-size: 25px;z-index: 2;"
+          (click)="slidePrev()">
+          <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button color="medium" fill="clear"
+          style="position: absolute;top: 50%;right: 16px;font-size: 25px;z-index: 2;" (click)="slideNext()">
+          <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-slides [options]="sliderConfig" paginationType="bullets" (ionSlideDidChange)="slideChanged()" #slides>
+          <ion-slide *ngFor="let design of skdesign | async">
+  
+            <ion-card>
+              <ion-buttons>
+                <ion-button (click)="delete(design)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-card-header>
+                <ion-card-title>
+                  {{design.name}}
+                </ion-card-title>
+                <b>{{design.price | currency:'Rs'}}</b>
+                <ion-card-content *ngIf="design.image">
+                  <img src="{{design.image}}" alt="" />
+                </ion-card-content>
+              </ion-card-header>
+              <ion-button expand="block" fill="outline" color="primary" (click)="selectDesign(design)">buy now</ion-button>
+            </ion-card>
+  
+          </ion-slide>
+        </ion-slides>
+  </ion-content>
+  

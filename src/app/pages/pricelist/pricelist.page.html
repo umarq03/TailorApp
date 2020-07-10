@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>RateList</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="main-home">
@@ -21,46 +21,67 @@
     <ion-item>
       <ion-label>Shalwar-Kameez</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.skameez}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
     </ion-item>
     <ion-item color="light">
       <ion-label>Shalwar-Kameez Double</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.skameezdouble}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item >
       <ion-label>Shirt</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.shirt}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item >
     <ion-item color="light">
       <ion-label>Pant</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.pant}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item>
       <ion-label>Kurta</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.kurta}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item color="light">
       <ion-label>Kurta Double</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.kurtadouble}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item>
       <ion-label>Waist-Coat</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.wcoat}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item color="light">
       <ion-label>Coat</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.coat}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item>
       <ion-label>Two-Piece</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.twopiece}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item color="light">
       <ion-label>Three-Piece</ion-label>
       <h5 *ngFor="let setting of (rateList | async) ">{{setting.threepiece}}</h5>
+      <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
     </ion-item>
     <ion-item button [routerLink]="['/more-ratelist', setting.id]" *ngFor="let setting of (moreratelist | async) ">
         <ion-label>{{setting.name}}</ion-label>
         <h5>{{setting.price}}</h5>
+        <ion-spinner name="dots" *ngIf="searching || (rateList | async) == 0"></ion-spinner>
+
       </ion-item>
   </div>
 

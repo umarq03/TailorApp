@@ -19,14 +19,15 @@
     <ion-icon name="sad-outline" class="icon" color="medium"></ion-icon>
   </ion-list>
   <ion-list>
-    <ion-card  *ngFor="let sk of (skdata | async)"
+    <ion-card  button [routerLink]="['/skameez', sk.id]" *ngFor="let sk of (skdata | async)"
       style="white-space: pre-wrap;">
       <ion-card-content>
-        <ion-input [(ngModel)]="fullname" text>{{sk.fullname}}</ion-input>
+        Name:{{sk.fullname}}<br />
+        Fabric:{{sk.fabric}}<br />
+        Design:{{sk.design}}<br />
+        phone:{{sk.phonenumber}}<br />
+        Date:{{sk.creaditAt | date:'short' }}
       </ion-card-content>
     </ion-card>
   </ion-list>
-  <div *ngFor="let sk of [skdata]">
-  <ion-button color="success" (click)="go(fullname)">passnameobject</ion-button>
-</div>
 </ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="medium">
+  <ion-toolbar color="secondary">
     <ion-title>Help</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="main-home"></ion-back-button>
@@ -16,6 +16,7 @@
       </ion-card-title>
       <ion-card-content>
        <span (click)="sendEmail()" *ngFor="let setting of (emailSetting | async) ">{{setting.email}}</span>
+       <ion-spinner name="dots" *ngIf="searching || (emailSetting| async) == 0"></ion-spinner>
       </ion-card-content>
     </ion-card-header>
   </ion-card>

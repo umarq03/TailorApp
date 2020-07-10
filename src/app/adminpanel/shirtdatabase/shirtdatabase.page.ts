@@ -11,11 +11,13 @@ import { LoadingController } from '@ionic/angular';
 export class ShirtdatabasePage implements OnInit {
   private shirtdata: Observable<Shirt[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
   constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.getDatabase();
+    this.shirtdata.subscribe(()=> this.searching = false);
+
   }
   searchTerm = '';
   searchText = '';
@@ -44,9 +46,7 @@ export class ShirtdatabasePage implements OnInit {
     }, 2000);
   }
   getDatabase() {
-    this.searching = true;
     this.shirtdata = this.database.getShirts();
-    this.searching = false;
      
   }
 

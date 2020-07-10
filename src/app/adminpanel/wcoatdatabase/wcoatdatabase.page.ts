@@ -11,11 +11,13 @@ import { LoadingController } from '@ionic/angular';
 export class WcoatdatabasePage implements OnInit {
   private waistcoatdata: Observable<WaistCoat[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
   constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.getDatabase();
+    this.waistcoatdata.subscribe(()=> this.searching = false);
+
   }
 
   searchTerm = '';
@@ -47,9 +49,7 @@ export class WcoatdatabasePage implements OnInit {
   }
 
   getDatabase() {
-    this.searching = true;
     this.waistcoatdata = this.database.getWaistCoats();
-    this.searching = false;
      
   }
 }

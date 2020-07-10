@@ -17,6 +17,8 @@ export class PricelistPage implements OnInit , OnDestroy{
   networkListener: PluginListenerHandle;
   private rateList: Observable<rateList[]>;
   private moreratelist: Observable<morerateList[]>;
+  searching: boolean = true;
+
   constructor(private menu: MenuController,
     private platform: Platform, private alertController: AlertController,
     private database: DatabaseService,
@@ -26,9 +28,6 @@ export class PricelistPage implements OnInit , OnDestroy{
 
   }
  
-ionViewWillEnter(){
-  this.loaddata();
-}
 
   async ngOnInit() {
     this.networkListener = Network.addListener('networkStatusChange', status => {
@@ -39,20 +38,12 @@ ionViewWillEnter(){
     this.networkStatus = await Network.getStatus();
     this.rateList = this.database.getRateLists();
     this.moreratelist = this.database.getMoreRateLists();
+    this.rateList.subscribe(()=> this.searching = false);
+
   }
 
   ngOnDestroy(): void{
     this.networkListener.remove();
-  }
-
-  async loaddata(){
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      keyboardClose: true,
-      message: '',
-      duration: 1000
-    });
-    await loading.present();
   }
 
 }

@@ -11,3 +11,14 @@ h6{
 .title{
   text-transform: capitalize;
 }
+ion-spinner{
+    
+  margin: auto;
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+  text-align: center;
+  transform: scale(1.8)
+}

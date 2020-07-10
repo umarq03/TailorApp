@@ -4,6 +4,9 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title class="main-title">Home</ion-title>
+    <ion-button (click)="presentPopover($event)" slot="end" fill="clear">
+      <ion-icon name="ellipsis-vertical-outline" mode="md" slot="icon-only" color="secondary"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +19,7 @@
       <h1 class="title2" *ngFor="let setting of (titleSetting | async) ">{{setting.title}}</h1>
     <span class="civil" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle1}}</span>
     <span class="custom" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle2}}</span>
+    <ion-spinner name="dots" *ngIf="searching || (starterSetting | async) == 0"></ion-spinner>
   </section>
 
   <ion-grid>

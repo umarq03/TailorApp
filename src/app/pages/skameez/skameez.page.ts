@@ -18,6 +18,7 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
 })
 export class SKameezPage implements OnInit{
   skameez = [];
+  wskameez = [];
   kameezdesigns = [];
   private cartItemCount = new BehaviorSubject(0);
   disablebtn;
@@ -54,42 +55,27 @@ export class SKameezPage implements OnInit{
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private androidPermissions: AndroidPermissions,
-    private sms: SMS,
-    private network: Network,
-    public dialog: Dialogs) {
+    private sms: SMS) {
 
-    this.menu.swipeGesture(true);
-    this.network.onDisconnect().subscribe(()=>{
-      this.showToast('Network was disconnected!')
-    });
-    
-    this.network.onConnect().subscribe(()=>{
-
-      setTimeout(() => {
-        this.showToast('You got a '+''+this.network.type+'connection, woooho!');
-      });
-    });
   }
 
   ionviewDidEnter() {
     this.disablebtn = false;
   }
   async ngOnInit() {
-    this.skameez = this.cartService.getskameez();
+    this.skameez = this.cartService.getskameezsummer();
+    this.wskameez = this.cartService.getskameezwinter();
     this.kameezdesigns = this.cartService.getkameezdesigns();
   }
   removeItem(product) {
     this.cartService.removeskamez(product);
-  }
-  getacartItemCount() {
-    return this.cartItemCount;
   }
   removedesigns(product) {
     this.cartService.removeskdesigns(product);
   }
 
   getTotal() {
-    return this.skameez.reduce((i, j) => i + +j.price + +j.stitching, 0)
+    return this.skameez.reduce((i, j) => i + +j.price + +j.stitching , 0)
   }
 
   getskfab() {
@@ -123,54 +109,54 @@ export class SKameezPage implements OnInit{
 
   async addDatabase() {
     if (this.idea.fullname == "") {
-      this.showToast("Name is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Name is required!')
     }
     else if (this.idea.phonenumber == "") {
-      this.showToast("PhoneNumber is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> PhoneNumber is required!')
     }
     else if (this.idea.address == "") {
-      this.showToast("Address is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Address is required!')
     }
     else if (this.idea.lambai == "") {
-      this.showToast("Lambai is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Lambai is required!')
     }
     else if (this.idea.chatti == "") {
-      this.showToast("Chatti is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Chatti is required!')
     }
     else if (this.idea.teera == "") {
-      this.showToast("Teera is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Teera is required!')
     }
     else if (this.idea.kameezbazu == "") {
-      this.showToast("KameezBazu is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> KameezBazu is required!')
     }
     else if (this.idea.neck == "") {
-      this.showToast("Neck is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Neck is required!')
     }
     else if (this.idea.kameezdaman == "") {
-      this.showToast("KameezDaman is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> KameezDaman is required!')
     }
     else if (this.idea.shalwarlambai == "") {
-      this.showToast("ShalwarLambai is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> ShalwarLambai is required!')
     }
     else if (this.idea.pancha == "") {
-      this.showToast("Pancha is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Pancha is required!')
     }
     else if (this.idea.daman == "") {
-      this.showToast("Daman is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Daman is not select!')
     }
     else if (this.idea.pockets == "") {
-      this.showToast("Pockets is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Pockets is not select!')
     }
     else if (this.idea.collar == "") {
-      this.showToast("Collar/Bain is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Collar/Bain is not select!')
     }
     else if (this.idea.bazu == "") {
-      this.showToast("Bazu is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Bazu is not select!')
     }
     else {
       this.disablebtn = true;
+      this.loaddata();
       this.database.addIdea(this.idea).then(() => {
-        this.loaddata();
         this.router.navigateByUrl('/categories');
         this.sendSMS();
         this.presentAlert();
@@ -182,13 +168,15 @@ export class SKameezPage implements OnInit{
    
   }
   async loaddata(){
-    const loading = await this.loadingCtrl.create({
+    const loadingSK = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
-      message: 'Sending Data...',
-      duration: 1500
+      message: 'Sending Data...'
     });
-    await loading.present();
+    await loadingSK.present();
+    {
+     loadingSK.dismiss();
+    }
   }
 
 
@@ -203,7 +191,7 @@ export class SKameezPage implements OnInit{
     this.database.deleteIdea(this.idea.id).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Skdata deleted');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Skdata deleted');
     }, err => {
       this.showToast('There was a problem deleting your Skdata :(');
     });
@@ -220,7 +208,7 @@ export class SKameezPage implements OnInit{
     this.database.updateIdea(this.idea).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Skdata updated');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Skdata updated');
     }, err => {
       this.showToast('There was a problem updating your Skdata :(');
     });
@@ -229,7 +217,15 @@ export class SKameezPage implements OnInit{
   showToast(msg) {
     this.toastCtrl.create({
       message: msg,
-      duration: 2000
+      duration: 2000,
+      color:'danger'
+    }).then(toast => toast.present());
+  }
+  showToast1(msg) {
+    this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      color:'success'
     }).then(toast => toast.present());
   }
   async presentAlert() {
@@ -263,7 +259,7 @@ export class SKameezPage implements OnInit{
         }
     };
     // this.sms.send('03018761467', this.idea.fullname+' '+'skameez data had been added at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
-          this.sms.send('03018761467', this.idea.fullname+' '+'is send you skameez data at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
+          this.sms.send('03018761467', this.idea.fullname+' '+'is send you skameez data at TailorShop.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
 
     })
     .catch(error => {
@@ -283,7 +279,7 @@ export class SKameezPage implements OnInit{
         }
     };
     // this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'recently your S-kameez data has been successfully added, from TailorMate!',options).then(() => {
-   this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'your S-Kameez data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorMate!',options).then(() => {
+   this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'your S-Kameez data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorShop!',options).then(() => {
 
     })
     .catch(error => {

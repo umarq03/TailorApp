@@ -11,28 +11,18 @@ import { ToastController, LoadingController } from '@ionic/angular';
 })
 export class HelpPage implements OnInit {
   private emailSetting: Observable<emailSetting[]>;
+  searching: boolean = true;
 
   constructor(private emailComposer: EmailComposer,private database: DatabaseService,
     private network: Network, private toastCtrl: ToastController,private loadingCtrl: LoadingController) {
-      this.network.onDisconnect().subscribe(()=>{
-        this.showToast('Network was disconnected!')
-      });
-      
-      this.network.onConnect().subscribe(()=>{
-  
-        setTimeout(() => {
-          this.showToast('You got a '+''+this.network.type+'connection, woooho!');
-        });
-      });
      }
 
   ngOnInit() {
     this.emailSetting = this.database.getEmailSettings();
+    this.emailSetting.subscribe(()=> this.searching = false);
 
   }
-  ionViewWillEnter(){
-    this.loaddata();
-  }
+ 
   showToast(msg) {
     this.toastCtrl.create({
       message: msg,
@@ -43,21 +33,10 @@ export class HelpPage implements OnInit {
   sendEmail() {
 
  this.emailComposer.open({
-   to:'{{setting.email}}',
    subject:'Any',
    isHtml:true
  });
 
-  }
-
-  async loaddata(){
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      keyboardClose: true,
-      message: '',
-      duration: 1000
-    });
-    await loading.present();
   }
 
 }

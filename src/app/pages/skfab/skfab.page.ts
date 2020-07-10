@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, ToastController , LoadingController} from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuController, ToastController, LoadingController, IonSlides, IonSlide } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DatabaseService, skfab } from 'src/app/services/database.service';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-
 @Component({
   selector: 'app-skfab',
   templateUrl: './skfab.page.html',
   styleUrls: ['./skfab.page.scss'],
 })
+
 export class SkfabPage implements OnInit {
   sksummerfab: AngularFirestoreCollection;
   sksummer: Observable<any[]>;
@@ -20,25 +20,27 @@ export class SkfabPage implements OnInit {
   searching: boolean = true;
   type: string;
 
+  @ViewChild(IonSlides, { static: false }) slides: IonSlides;
+
   sliderConfig = {
-    spaceBetween: 10,
+    zoom: {maxRatio:3},
+    slidesPerView: 1.4,
     centeredSlides: true,
-    slidesPerView: 1.5
+    spaceBetween: 8,
+    loop: true
   }
+
   constructor
     (
-    private router: Router,
-    private menu: MenuController,
-    private cartService: CartService,
-    private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController,
-    private database: DatabaseService,
-    private db: AngularFirestore,
-    private storage: AngularFireStorage
-    ) 
-  
-  {
-    this.menu.swipeGesture(false);
+      private router: Router,
+      private menu: MenuController,
+      private cartService: CartService,
+      private toastCtrl: ToastController,
+      private loadingCtrl: LoadingController,
+      private database: DatabaseService,
+      private db: AngularFirestore,
+      private storage: AngularFireStorage
+    ) {
 
     this.sksummerfab = db.collection('sksummerfabData')
     this.sksummer = this.sksummerfab.valueChanges();
@@ -46,14 +48,24 @@ export class SkfabPage implements OnInit {
     this.skwinterfab = db.collection('skwinterfabData')
     this.skwinter = this.skwinterfab.valueChanges();
 
-    this.sksummer.subscribe(()=> this.searching = false);
-    this.skwinter.subscribe(()=> this.searching = false);
+    this.sksummer.subscribe(() => this.searching = false);
+    this.skwinter.subscribe(() => this.searching = false);
   }
 
 
 
   ngOnInit() {
-     this.type = 'summer';
+    this.type = 'summer';
+  }
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is ', currentIndex)
+  }
+  slidePrev() {
+    this.slides.slidePrev();
+  }
+  slideNext() {
+    this.slides.slideNext();
   }
 
   segmentChanged(ev: any) {
@@ -63,20 +75,20 @@ export class SkfabPage implements OnInit {
   showToast(msg) {
     this.toastCtrl.create({
       message: msg,
-      duration: 2000
+      duration: 2500
     }).then(toast => toast.present());
   }
 
-  async deleteSummer(summ){
+  async deleteSummer(summ) {
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
       message: 'Deleting...',
       duration: 1000
-      
+
     });
     await loading.present();
 
-    if(summ.imageSummer){
+    if (summ.imageSummer) {
       this.storage.ref(`sksummer/${summ.id}`).delete();
     }
     this.sksummerfab.doc(summ.id).delete()
@@ -84,49 +96,61 @@ export class SkfabPage implements OnInit {
     this.showToast('Summer fabric deleted')
   }
 
-  async deleteWinter(win){
+  async deleteWinter(win) {
     const loading = await this.loadingCtrl.create({
       spinner: 'circles',
       message: 'Deleting...',
       duration: 1000
-      
+
     });
     await loading.present();
 
-    if(win.imageSummer){
+    if (win.imageSummer) {
       this.storage.ref(`skwinter/${win.id}`).delete();
     }
     this.skwinterfab.doc(win.id).delete()
     this.loadingCtrl.dismiss();
-    this.showToast('Summer fabric deleted')
+    this.showToast('Winter fabric deleted')
   }
 
-  updateSummer(id, fabname, price, meter, discount, stock){
-  //  console.log(
-  //     id, fabname );
-  this.router.navigate(['editfabric', {
-    id: id,
-    fabname: fabname,
-    price: price,
-    meter: meter,
-    discount: discount,
-    stock: stock
-  }])
-  
-  }
-  updateWinter(id, Wfabname, Wprice, Wmeter, Wdiscount, Wstock){
+  updateSummer(id, fabname, price, meter, discount, stock) {
     //  console.log(
     //     id, fabname );
     this.router.navigate(['editfabric', {
       id: id,
-      Wfabname: Wfabname,
-      Wprice: Wprice,
-      Wmeter: Wmeter,
-      Wdiscount: Wdiscount,
-      Wstock: Wstock
+      fabname: fabname,
+      price: price,
+      meter: meter,
+      discount: discount,
+      stock: stock
     }])
-    
-    }
+
+  }
+  updateWinter(id, fabname, price, meter, discount, stock) {
+    //  console.log(
+    //     id, fabname );
+    this.router.navigate(['editfabric', {
+      id: id,
+      fabname: fabname,
+      price: price,
+      meter: meter,
+      discount: discount,
+      stock: stock
+    }])
+
+  }
+
+  selectSFab(summ) {
+    this.cartService.skSFab(summ);
+    this.router.navigateByUrl('skameez')
+    this.showToast('Summer fab choosed')
+
+  }
+  selectWFab(win) {
+    this.cartService.skWFab(win);
+    this.router.navigateByUrl('skameez');
+    this.showToast('Winter fab choosed')
+  }
 
 
 }

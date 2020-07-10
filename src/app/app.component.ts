@@ -46,26 +46,23 @@ export class AppComponent implements OnInit {
     this.menu.enable(true, "first");
     this.menu.open("first");
 
+    this.network.onDisconnect().subscribe(()=>{
+      this.showToast('<ion-icon name="warning-outline"></ion-icon>  Network was disconnected!')
+    });
+    
+    this.network.onConnect().subscribe(()=>{
+
+      setTimeout(() => {
+        this.showToast1('<ion-icon name="wifi-outline"></ion-icon> You got a '+''+this.network.type+'connection');
+      });
+    });
+
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
-
-
-      // this.asAuth.authState.subscribe(user => {
-
-      //   if (user) {
-      //     this.isAuthenticated = true;
-      //     this.router.navigateByUrl('/main-home');
-      //     this.rootPage = MainHomePage;
-      //   } else {
-      //     this.isAuthenticated = false;
-      //     this.router.navigateByUrl('/home');
-      //     this.rootPage = HomePage
-      //   }
-      // });
 
       // this.badge.set(15);
       // this.badge.increase(1);
@@ -74,58 +71,32 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.authservice.userDetails().subscribe(res => {
-    //   if (res !== null) {
-    //     this.userEmail = res.email;
-    //     this.navCtrl.navigateForward('/main-home');
-    //   } else {
-    //     this.navCtrl.navigateBack('/home');
-    //   }
-    // })
+    this.authservice.userDetails().subscribe(res => {
+      if (res !== null) {
+        this.userEmail = res.email;
+        this.navCtrl.navigateForward('/main-home');
+      } else {
+        this.navCtrl.navigateBack('/home');
+      }
+    })
+  }
+  showToast(msg) {
+    this.toast.create({
+      message: msg,
+      duration: 2000,
+      color:'danger'
+    }).then(toast => toast.present());
+  }
+  showToast1(msg) {
+    this.toast.create({
+      message: msg,
+      duration: 2000,
+      color:'success'
+    }).then(toast => toast.present());
   }
 
   gotosetting() {
     this.router.navigateByUrl('/main-setting');
-  }
-
-
-  // async logOut() {
-  //   const loading = await this.presentLoading();
-  //   this.asAuth.auth.signOut().then(() => {
-  //     this.AllertAll('SignedOut Successfully', '')
-  //     this.navCtrl.navigateForward('/home');
-  //   });
-
-  //   this.loadingCtrl.dismiss();
-  // }
-
-  async logOut() {
-    const loading = await this.presentLoading();
-    this.asAuth.auth.signOut();
-    this.AllertAll("Signed Out Successfully", "");
-    this.loadingCtrl.dismiss();  
-    this.router.navigate(['/home']);
-  }
-
-  async AllertAll(header: string, message: string) {
-    this.allet = await this.toast.create({
-      header: header,
-      message: message,
-      // buttons: ['ok']
-      duration: 3000
-    })
-    await this.allet.present();
-  }
-
-  async presentLoading() {
-    console.log('starting loading');
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      keyboardClose: true,
-      message: 'Signing you out, Please Wait',
-      duration: 1000
-    });
-    return await loading.present();
   }
 
   help() {

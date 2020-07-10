@@ -18,14 +18,15 @@ import { Dialogs } from '@ionic-native/dialogs/ngx';
 })
 export class CoatPage implements OnInit {
   coat = [];
+  wcoat = [];
   coatdesigns = [];
   disablebtn;
   base64Image: string;
   idea: Coat = {
     fabric: '',
-    design:'',
+    design: '',
     fullname: '',
-    phonenumber:'',
+    phonenumber: '',
     address: '',
     lambai: '',
     chatti: '',
@@ -51,24 +52,14 @@ export class CoatPage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private androidPermissions: AndroidPermissions,
-    private sms: SMS,
-    private network: Network,
-    public dialog: Dialogs) {
-    
-    this.network.onDisconnect().subscribe(()=>{
-      this.showToast('Network was disconnected!')
-    });
-    
-    this.network.onConnect().subscribe(()=>{
+    private sms: SMS) {
 
-      setTimeout(() => {
-        this.showToast('You got a '+''+this.network.type+'connection, woooho!');
-      });
-    });
+
   }
 
   async ngOnInit() {
     this.coat = this.cartService.getcoat();
+    this.wcoat = this.cartService.getwcoat();
     this.coatdesigns = this.cartService.getcoatdesigns();
   }
   getcoatfab() {
@@ -76,6 +67,12 @@ export class CoatPage implements OnInit {
   }
   getcoatdesigns() {
     this.router.navigateByUrl('/coatdesigns');
+  }
+  removeItem(product) {
+    this.cartService.removecoat(product);
+  }
+  removedesigns(product) {
+    this.cartService.removecoatdesigns(product);
   }
   getTotal() {
     return this.coat.reduce((i, j) => i + +j.price + +j.stitching, 0)
@@ -106,65 +103,67 @@ export class CoatPage implements OnInit {
   }
   async addDatabase() {
     if (this.idea.fullname == "") {
-      this.showToast("Name is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Name is required!')
     }
     else if (this.idea.phonenumber == "") {
-      this.showToast("PhoneNumber is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> PhoneNumber is required!')
     }
     else if (this.idea.address == "") {
-      this.showToast("Address is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Address is required!')
     }
     else if (this.idea.lambai == "") {
-      this.showToast("Lambai is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Lambai is required!')
     }
     else if (this.idea.chatti == "") {
-      this.showToast("Chatti is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Chatti is required!')
     }
     else if (this.idea.kamar == "") {
-      this.showToast("Kamar is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Kamar is required!')
     }
     else if (this.idea.teera == "") {
-      this.showToast("Teera is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Teera is required!')
     }
     else if (this.idea.neck == "") {
-      this.showToast("Neck is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Neck is required!')
     }
     else if (this.idea.bazu == "") {
-      this.showToast("Bazu is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Bazu is required!')
     }
     else if (this.idea.shoulder == "") {
-      this.showToast("Shoulder is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Shoulder is required!')
     }
     else if (this.idea.crossback == "") {
-      this.showToast("CrossBack is required!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> CrossBack is required!')
     }
     else if (this.idea.brest == "") {
-      this.showToast("Brest is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> Brest is not select!')
     }
     else if (this.idea.doublebrest == "") {
-      this.showToast("DoubleBrest is not select!")
+      this.showToast('<ion-icon name="warning-outline"></ion-icon> DoubleBrest is not select!')
     } else {
       this.disablebtn = true;
+      this.loaddata();
       this.database.addCoat(this.idea).then(() => {
-        this.loaddata();
         this.sendSMS();
         this.router.navigateByUrl('/categories');
         this.presentAlert();
       }, err => {
         this.showToast('There was a problem adding your Coatdata :(');
       });
-     
+
     }
-   
+
   }
-  async loaddata(){
-    const loading = await this.loadingCtrl.create({
+  async loaddata() {
+    const loadingSK = await this.loadingCtrl.create({
       spinner: 'circles',
       keyboardClose: true,
-      message: 'Sending Data...',
-      duration: 1500
+      message: 'Sending Data...'
     });
-    await loading.present();
+    await loadingSK.present();
+    {
+      loadingSK.dismiss();
+    }
   }
 
   async deleteIdea() {
@@ -178,7 +177,7 @@ export class CoatPage implements OnInit {
     this.database.deleteCoat(this.idea.id).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Coatdata deleted');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Coatdata deleted');
     }, err => {
       this.showToast('There was a problem deleting your Coatdata :(');
     });
@@ -194,7 +193,7 @@ export class CoatPage implements OnInit {
     this.database.updateCoat(this.idea).then(() => {
       this.router.navigateByUrl('/admin-database');
       loading.dismiss();
-      this.showToast('Coatdata updated');
+      this.showToast1('<ion-icon name="checkmark-outline"></ion-icon> Coatdata updated');
     }, err => {
       this.showToast('There was a problem updating your Coatdata :(');
     });
@@ -203,10 +202,17 @@ export class CoatPage implements OnInit {
   showToast(msg) {
     this.toastCtrl.create({
       message: msg,
-      duration: 2000
+      duration: 2000,
+      color: 'danger'
     }).then(toast => toast.present());
   }
-
+  showToast1(msg) {
+    this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      color: 'success'
+    }).then(toast => toast.present());
+  }
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: 'Message',
@@ -231,39 +237,39 @@ export class CoatPage implements OnInit {
     this.send();
     // CONFIGURATION
     const options = {
-        replaceLineBreaks: false, // true to replace \n by a new line, false by default
-        android: {
-            intent: ''  // send SMS with the native android SMS messaging
-            // intent: '' // send SMS without opening any other app
-        }
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: ''  // send SMS with the native android SMS messaging
+        // intent: '' // send SMS without opening any other app
+      }
     };
-    this.sms.send('03018761467', this.idea.fullname+' '+'is send you coat data at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
+    this.sms.send('03018761467', this.idea.fullname + ' ' + 'is send you coat data at TailorShop.' + ' ' + 'customer phonenumber is :' + ' ' + this.idea.phonenumber + ' ' + 'at' + this.idea.creaditAt, options).then(() => {
       // this.sms.send('03018761467', this.idea.fullname+' '+'coat data had been added at TailorMate.'+' '+'customer phonenumber is :'+' '+this.idea.phonenumber+' '+'at'+this.idea.creaditAt,options).then(() => {
 
     })
-    .catch(error => {
-      this.showToast('ErrorFailed: ' + error);
-    });
+      .catch(error => {
+        this.showToast('ErrorFailed: ' + error);
+      });
   }
   send() {
     this.checkSMSPermission();
 
-  
+
     // CONFIGURATION
     const options = {
-        replaceLineBreaks: false, // true to replace \n by a new line, false by default
-        android: {
-            intent: ''  // send SMS with the native android SMS messaging
-            // intent: '' // send SMS without opening any other app
-        }
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: ''  // send SMS with the native android SMS messaging
+        // intent: '' // send SMS without opening any other app
+      }
     };
-    this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'your coat data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorMate!',options).then(() => {
+    this.sms.send(String(this.idea.phonenumber), this.idea.fullname + ' ' + 'your coat data successfully sent, after 10 minutes we will call/sms you for confirmation , from TailorShop!', options).then(() => {
       // this.sms.send(String(this.idea.phonenumber),this.idea.fullname+' '+'recently your coat data has been successfully added, from TailorMate!',options).then(() => {
 
     })
-    .catch(error => {
-      this.showToast('ErrorFailed:samina ' + error);
-    });
+      .catch(error => {
+        this.showToast('ErrorFailed:samina ' + error);
+      });
   }
 
 }

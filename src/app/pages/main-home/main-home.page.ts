@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { ToastController, MenuController, NavController } from '@ionic/angular';
+import { ToastController, MenuController, NavController, PopoverController } from '@ionic/angular';
 import {Plugins, PluginListenerHandle, NetworkStatus} from '@capacitor/core' 
 const { Network } = Plugins;
 import { Observable } from 'rxjs';
 import { DatabaseService, titleSetting } from 'src/app/services/database.service';
 import { LoadingController } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { PopoverComponent } from 'src/app/popover/popover.component';
 
 @Component({
   selector: 'app-main-home',
@@ -17,11 +20,14 @@ export class MainHomePage implements OnInit ,OnDestroy{
  networkListener: PluginListenerHandle;
  private titleSetting: Observable<titleSetting[]>;
  userEmail: string;
+ searching: boolean = true;
+ allet: any;
 
   constructor(private toastCtrl: ToastController, private menu: MenuController,
     private database: DatabaseService, private loadingCtrl: LoadingController,
-    private authservice: AuthServiceService, private navCtrl: NavController) {   
-   this.menu.swipeGesture(true);
+    private authservice: AuthServiceService, private navCtrl: NavController,
+    public asAuth: AngularFireAuth, private router: Router,public popover: PopoverController
+    ) {   
  }
 
   async ngOnInit() {
@@ -32,28 +38,23 @@ export class MainHomePage implements OnInit ,OnDestroy{
     );
     this.networkStatus = await Network.getStatus();
     this.titleSetting = this.database.getTitleSettings();
-  }
-
-  // ionViewWillEnter(){
-  //   this.loaddata();
-  // }
-  ionViewDidLoad(){
-    this.loaddata()
+    this.titleSetting.subscribe(()=> this.searching = false);
   }
 
   ngOnDestroy(): void{
     this.networkListener.remove();
   }
-  async loaddata(){
-    const loading = await this.loadingCtrl.create({
-      spinner: 'circles',
-      keyboardClose: true,
-      message: ''
+  async presentPopover(ev: any) {
+    const popover = await this.popover.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
     });
-    await loading.present();
-    loading.dismiss();
+    return await popover.present();
+    
   }
- 
-
-
 }
+
+
+

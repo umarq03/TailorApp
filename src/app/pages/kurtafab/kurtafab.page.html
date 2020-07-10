@@ -1,31 +1,114 @@
 <ion-header>
-  <ion-toolbar color="medium">
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="fabrics"></ion-back-button>
     </ion-buttons>
     <ion-title>Kurta Fab</ion-title>
-    <ion-buttons slot="end">
-      <div>{{cartItemCount | async}}</div>
-      <ion-button (click)="openCart()" #cart>
-        <ion-icon name="cart" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="grid">
-    <ion-grid>
-      <ion-card>
-        <ion-row *ngFor=" let cat of items">
-          <ion-col *ngFor="let product of cat.Product8">
-            <h5 text-wrap>{{product.price | currency:'Rs'}} {{product.name}}</h5>
-            <img src="{{ product.image }}" alt="" style="height: 280px; width:250px;">
-            <ion-button expand="full" (click)="addToCart(product)" color="danger">Add To Cart</ion-button>
-            <ion-button expand="full" (click)="selectFabric(product)" color="medium">Select For Stitching</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-grid>
+<ion-content class="ion-padding">
+
+  <ion-segment color="primary" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="summer" checked>
+      <ion-label>Summer</ion-label>
+      <ion-icon name="sunny-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="winter">
+      <ion-label>Winter</ion-label>
+      <ion-icon name="snow-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'summer'">
+      <ion-spinner name="circles" *ngIf="searching || (kurtasummer | async) == 0"></ion-spinner>
+      <ion-button color="medium" fill="clear" style="position: absolute;top: 50%;left: 16px;font-size: 25px;z-index: 2;"
+        (click)="slidePrev()">
+        <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button color="medium" fill="clear"
+        style="position: absolute;top: 50%;right: 16px;font-size: 25px;z-index: 2;" (click)="slideNext()">
+        <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-slides [options]="sliderConfig" paginationType="bullets" (ionSlideDidChange)="slideChanged()" #slides>
+        <ion-slide *ngFor="let summ of kurtasummer | async">
+
+          <ion-card>
+            <!-- <ion-buttons>
+              <ion-button
+                (click)="updateSummer(summ.id, summ.fabname, summ.price, summ.meter, summ.discount, summ.stock)">
+                <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button (click)="deleteSummer(summ)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons> -->
+            <ion-card-header>
+              <ion-card-title>
+                {{summ.fabname}}
+              </ion-card-title>
+              <ion-card-content *ngIf="summ.imageSummer">
+                <ion-fab>
+                  <b>{{summ.discount}}</b>
+                </ion-fab>
+                <img src="{{summ.imageSummer}}" alt="" />
+              </ion-card-content>
+              <ion-label class="stock">{{summ.stock}}</ion-label><br />
+              <b class="meter">{{summ.meter}}</b><br />
+              <b>{{summ.price | currency:'Rs'}}</b>
+            </ion-card-header>
+            <ion-button expand="block" fill="outline" color="primary" (click)="selectSFab(summ)">buy now</ion-button>
+          </ion-card>
+
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div *ngSwitchCase="'winter'">
+      <ion-spinner name="circles" *ngIf="searching || (kurtawinter | async) == 0"></ion-spinner>
+      <ion-button color="medium" fill="clear" style="position: absolute;top: 50%;left: 16px;font-size: 25px;z-index: 2;"
+        (click)="slidePrev()">
+        <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button color="medium" fill="clear"
+        style="position: absolute;top: 50%;right: 16px;font-size: 25px;z-index: 2;" (click)="slideNext()">
+        <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let win of kurtawinter | async">
+
+          <ion-card>
+            <!-- <ion-buttons>
+              <ion-button (click)="updateWinter(win.id, win.fabname, win.price, win.meter, win.discount, win.stock)">
+                <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button (click)="deleteWinter(win)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons> -->
+            <ion-card-header>
+              <ion-card-title>
+                {{win.fabname}}
+              </ion-card-title>
+              <ion-card-content *ngIf="win.imageWinter">
+                <ion-fab>
+                  <b>{{win.discount}}</b>
+                </ion-fab>
+                <img src="{{win.imageWinter}}" alt="" />
+              </ion-card-content>
+              <ion-label class="stock">{{win.stock}}</ion-label><br />
+              <b class="meter">{{win.meter}}</b><br />
+              <b>{{win.price | currency:'Rs'}}</b>
+            </ion-card-header>
+            <ion-button expand="block" fill="outline" color="secondary" (click)="selectWFab(win)">buy now
+            </ion-button>
+          </ion-card>
+
+        </ion-slide>
+      </ion-slides>
+
+    </div>
   </div>
+
 </ion-content>

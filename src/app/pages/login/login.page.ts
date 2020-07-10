@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
   disabledbtn;
   user: any;
   alluser: any;
+  aluser: any;
   loader: any;
   constructor(private router: Router, private dataAuth: AngularFireAuth, private allert: AlertController,
     private toast: ToastController, private menu: MenuController, private loadingCtrl: LoadingController,
@@ -31,47 +32,9 @@ export class LoginPage implements OnInit {
     this.menu.swipeGesture(false);
   }
   ngOnInit() {
-    // this.validations_form = this.formbuilder.group({
-    //   email: new FormControl('', Validators.compose([
-    //     Validators.required,
-    //     Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-    //   ])),
-    //   password: new FormControl('', Validators.compose([
-    //     Validators.minLength(5),
-    //     Validators.required
-    //   ])),
-    // });
+   
   }
 
-  // validation_messages = {
-  //   'email': [
-  //     { type: 'required', message: 'Email is required.' },
-  //     { type: 'pattern', message: 'Please enter a valid email.' }
-  //   ],
-  //   'password': [
-  //     { type: 'required', message: 'Password is required.' },
-  //     { type: 'minlength', message: 'Password must be at least 5 characters long.' }
-  //   ]
-  // };
-
-  // async loginUser(value) {
-  //   const loading = await this.presentLoading();
-  //   this.authservice.loginUser(value)
-  //     .then(res => {
-  //       console.log(res);
-  //       this.errorMessage = "";
-  //       this.AllertAll("Signing you in Successfully", '');
-  //       this.loadingCtrl.dismiss();
-  //       this.navCtrl.navigateForward('/main-home');
-  //     }, err => {
-  //       this.errorMessage = err.message;
-  //       this.loadingCtrl.dismiss(); 
-  //     })
-  // }
-
-  // goToRegisterPage() {
-  //   this.navCtrl.navigateForward('/register');
-  // }
 
   ionViewDidEnter(){
     this.disabledbtn = false;
@@ -98,7 +61,7 @@ export class LoginPage implements OnInit {
 
     } catch (error) {
       this.loadingCtrl.dismiss();   
-      this.AllertAll('Invalid email, password,',error.message);
+      this.AllertAl('Invalid email, password,',error.message);
       console.dir("Error", error.message);
     }
 
@@ -110,10 +73,25 @@ export class LoginPage implements OnInit {
       header: header,
       message: message,
       // buttons: ['ok']
-      duration: 3000
+      duration: 3000,
+      color:'success'
     })
 
     await this.alluser.present();
+
+
+  }
+  async AllertAl(header: string, message: string) {
+    this.aluser = await this.toast.create({
+
+      header: header,
+      message: message,
+      // buttons: ['ok']
+      duration: 3000,
+      color:'danger'
+    })
+
+    await this.aluser.present();
 
 
   }

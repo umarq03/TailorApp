@@ -3,7 +3,7 @@
 </ion-app>
 <ion-menu side="start" menuId="first" content-id="mainApp" class="startmenu" >
   <ion-header>
-    <ion-toolbar color="medium">
+    <ion-toolbar color="secondary">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
     <ion-toolbar>
@@ -13,71 +13,65 @@
   <ion-content color="light">
     <ion-list>
       <ion-menu-toggle autoHide="true">
-        <ion-item [routerLink]="['/main-home']" color="light">
-          <ion-icon name="home-outline"></ion-icon>
+        <ion-item [routerLink]="['/main-home']" >
+          <ion-icon name="home-outline" color="secondary"></ion-icon>
           Home
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle>
+      <!-- <ion-menu-toggle autoHide="true">
         <ion-item [routerLink]="['/admin-database']">
-          <ion-icon name="book-outline"></ion-icon> 
+          <ion-icon name="book-outline" color="secondary"></ion-icon> 
           AdminPanel
         </ion-item>
-      </ion-menu-toggle>
+      </ion-menu-toggle> -->
       <ion-menu-toggle autoHide="true">
         <ion-item [routerLink]="['/categories']">
-          <ion-icon name="body-outline"></ion-icon>
+          <ion-icon name="body-outline" color="secondary"></ion-icon>
           Measurements
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
-        <ion-item [routerLink]="['/designs']" color="light">
-          <ion-icon name="albums-outline"></ion-icon>
+        <ion-item [routerLink]="['/designs']">
+          <ion-icon name="albums-outline" color="secondary"></ion-icon>
           Designs
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
         <ion-item [routerLink]="['/fabrics']">
-          <ion-icon name="grid-outline"></ion-icon>
+          <ion-icon name="grid-outline" color="secondary"></ion-icon>
           Fabrics
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
-        <ion-item [routerLink]="['/pricelist']" color="light">
-          <ion-icon name="list-outline"></ion-icon>
+        <ion-item [routerLink]="['/pricelist']" >
+          <ion-icon name="list-outline" color="secondary"></ion-icon>
           RateList
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
         <ion-item (click)="sendShare()">
-          <ion-icon name="share-social-outline"></ion-icon>
+          <ion-icon name="share-social-outline" color="secondary"></ion-icon>
           Share
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
-        <ion-item (click)="help()" color="light">
-          <ion-icon name="help-circle-outline"></ion-icon>
+        <ion-item (click)="help()">
+          <ion-icon name="help-circle-outline" color="secondary"></ion-icon>
           Help
         </ion-item>
       </ion-menu-toggle>
       <ion-menu-toggle autoHide="true">
         <ion-item (click)="aboutPage()">
-          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-icon name="alert-circle-outline" color="secondary"></ion-icon>
           About
         </ion-item>
       </ion-menu-toggle>
-      <ion-menu-toggle autoHide="true">
-        <ion-item (click)="gotosetting()" color="light">
-          <ion-icon name="settings-outline"></ion-icon>
+      <!-- <ion-menu-toggle autoHide="true">
+        <ion-item (click)="gotosetting()">
+          <ion-icon name="settings-outline" color="secondary"></ion-icon>
           Settings
         </ion-item>
-      </ion-menu-toggle>
-      <ion-menu-toggle autoHide="true">
-        <ion-item (click)="logOut()" color="light">
-          <ion-icon name="log-out-outline"></ion-icon>
-          Sign Out
-        </ion-item>
-      </ion-menu-toggle>
+      </ion-menu-toggle> -->
     </ion-list>
   </ion-content>
 </ion-menu>

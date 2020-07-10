@@ -1,32 +1,24 @@
-.image-container{
-
-    height: 230px;
-}
-.grid{
-
-   padding: 0 50px;
-}
-small{
-
-    color: #999;
-}
-// .grid1{
-
-//     padding: 10px;
-// }
-h5{
-
-    text-align: center;
-    position: relative;
-    
+ion-fab{
+    color: #4daf7c;
+    background: white;
+    border-radius: 100%;
 }
 .stock{
-    color: red;
-    float: left;
-    position: relative;
+    color: #f64747;
 }
 ion-spinner{
-    display: block;
-    margin-top: 200px;
-    margin-left: 150px;
+    
+    margin: auto;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    bottom: 0; 
+    right: 0;
+    text-align: center;
+}
+.meter{
+    color: #4daf7c;
+}
+ion-icon{
+    font-size: 30px;
 }

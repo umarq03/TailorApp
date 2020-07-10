@@ -13,12 +13,14 @@ export class PantdatabasePage implements OnInit {
   skdatabase = SkdatabasePage;
   private pantdata: Observable<Pant[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
 
   constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
 
  ngOnInit() {
     this.getDatabase();
+    this.pantdata.subscribe(()=> this.searching = false);
+
   }
   searchTerm = '';
   searchText = '';
@@ -47,9 +49,7 @@ export class PantdatabasePage implements OnInit {
     }, 2000);
   }
   getDatabase() {
-    this.searching = true;
     this.pantdata = this.database.getPants();
-    this.searching = false;
      
   }
 

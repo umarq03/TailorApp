@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="fabrics"></ion-back-button>
     </ion-buttons>
-    <ion-title>Editfabric</ion-title>
+    <ion-title>Edit sk fabric</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <div>
-  <h4>Edit Summer Fabric</h4>
+  <h4>Edit Sk Summer or Winter Fabric</h4>
     <ion-item>
       <ion-label>FabName:</ion-label>
       <ion-input type="text" [(ngModel)]="fabric.fabname"></ion-input>
@@ -27,6 +27,10 @@
       <ion-input type="text" [(ngModel)]="fabric.discount"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.stitching"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Availability:</ion-label>
       <ion-select placeholder="Select One" [(ngModel)]="fabric.stock">
         <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
@@ -36,38 +40,12 @@
   </div>
 
   <div>
-    <ion-button (click)="updateSummer(fabric.fabname, fabric.price, fabric.discount, fabric.meter, fabric.stock )" color="success"
-      expand="block" fill="outline">update Summer</ion-button>
+    <ion-button (click)="updateSummer(fabric.fabname, fabric.price, fabric.discount, fabric.meter, fabric.stock )" color="danger"
+      expand="block" fill="outline">update summer</ion-button>
   </div>
-
+  <h4>OR</h4>
   <div>
-      <h4>Edit Winter Fabric</h4>
-        <ion-item>
-          <ion-label>FabName:</ion-label>
-          <ion-input type="text" [(ngModel)]="fab.Wfabname"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Price:</ion-label>
-          <ion-input type="text" [(ngModel)]="fab.Wprice"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Meter:</ion-label>
-          <ion-input type="text" [(ngModel)]="fab.Wmeter"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Discount in %:</ion-label>
-          <ion-input type="text" [(ngModel)]="fab.Wdiscount"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Availability:</ion-label>
-          <ion-select placeholder="Select One" [(ngModel)]="fab.Wstock">
-            <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
-            <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </div>
-  <div>
-    <ion-button (click)="updateWinter(fab.Wfabname, fab.Wprice, fab.Wdiscount,fab.Wmeter, fab.Wstock)" color="success"
+    <ion-button (click)="updateWinter(fabric.fabname, fabric.price, fabric.discount,fabric.meter, fabric.stock)" color="secondary"
       expand="block" fill="outline">update Winter</ion-button>
   </div>
 </ion-content>

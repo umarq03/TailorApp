@@ -25,11 +25,25 @@ img{
 
 h1{
     font-size: 28px;
-    color: white;
     text-transform: capitalize;
+    color: white
 }
 p{
     text-align: justify;
     font-size: 20px;
-    color: whitesmoke;
+    color: white
+}
+ion-spinner{
+    
+    margin: auto;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    bottom: 0; 
+    right: 0;
+    text-align: center;
+    padding-top: 30px;
+    --color: white;
+    transform: scale(1.2);
+
 }

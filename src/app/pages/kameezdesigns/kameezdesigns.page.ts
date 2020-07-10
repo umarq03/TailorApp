@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MenuController, ToastController, LoadingController, IonSlides, IonSlide } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { DatabaseService, skfab } from 'src/app/services/database.service';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-kameezdesigns',
@@ -9,45 +13,71 @@ import { ToastController, LoadingController } from '@ionic/angular';
   styleUrls: ['./kameezdesigns.page.scss'],
 })
 export class KameezdesignsPage implements OnInit {
-  kameezdesigns = [];
-
-  constructor(private router: Router, private cartService: CartService, private toastCtrl: ToastController, private loadingCtrl: LoadingController) { }
+  skdesigns: AngularFirestoreCollection;
+  skdesign: Observable<any[]>;
+  searching: boolean = true;
+  @ViewChild(IonSlides, { static: false }) slides: IonSlides;
+  sliderConfig = {
+    zoom: {maxRatio:3},
+    slidesPerView: 1.4,
+    centeredSlides: true,
+    spaceBetween: 8,
+    loop: true
+  }
+  constructor(private router: Router,
+    private menu: MenuController,
+    private cartService: CartService,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private database: DatabaseService,
+    private db: AngularFirestore,
+    private storage: AngularFireStorage) { 
+      this.skdesigns = db.collection('skdesignData')
+    this.skdesign = this.skdesigns.valueChanges();
+    }
 
   ngOnInit() {
-    this.kameezdesigns = this.cartService.getProduct();
   }
 
-  selectFabric(product){
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    console.log('Current index is ', currentIndex)
+  }
+  slidePrev() {
+    this.slides.slidePrev();
+  }
+  slideNext() {
+    this.slides.slideNext();
+  }
 
+  showToast(msg) {
+    this.toastCtrl.create({
+      message: msg,
+      duration: 2500
+    }).then(toast => toast.present());
+  }
+
+  async delete(design) {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'circles',
+      message: 'Deleting...',
+      duration: 1000
+
+    });
+    await loading.present();
+
+    if (design.image) {
+      this.storage.ref(`skdesign/${design.id}`).delete();
+    }
+    this.skdesigns.doc(design.id).delete()
+    this.loadingCtrl.dismiss();
+    this.showToast('Design deleted')
+  }
+
+  selectDesign(product) {
     this.cartService.addkameezdesigns(product);
-    this.loadData();
-    this.router.navigate(['/skameez']);
-    this.showToast('skDesign Choosed!');
-}
-async ionViewWillEnter() {
-  const loading = await this.loadingCtrl.create({
-    spinner: 'circles',
-    message: 'Loading Data...',
-    duration: 1000
-    
-  });
-  await loading.present();
-}
-async loadData() {
-  const loading = await this.loadingCtrl.create({
-    spinner: 'circles',
-    keyboardClose: true,
-    message: 'Loading...'
-  });
-  await loading.present();
-  {
-    loading.dismiss();
+    this.router.navigateByUrl('skameez')
+    this.showToast('Design choosed')
+
   }
-}
-showToast(msg) {
-  this.toastCtrl.create({
-    message: msg,
-    duration: 2000
-  }).then(toast => toast.present());
-}
 }

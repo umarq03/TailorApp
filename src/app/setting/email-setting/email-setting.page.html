@@ -13,18 +13,6 @@
       <ion-label>Email:</ion-label>
       <ion-input type="email" [(ngModel)]="idea.email"></ion-input>
     </ion-item>
-    <!-- <ion-item>
-      <ion-button (click)="chooserimage()">image</ion-button>
-    </ion-item> -->
-    <!-- <ion-spinner *ngIf="searching || (items | async) == 0"></ion-spinner>
-    <div *ngFor="let item of items | async">
-    <div *ngIf="item.imageURl">
-      <ion-input>Name:{{item.name}}</ion-input>
-      <ion-button (click)="delete(item)" slot="end">D</ion-button>
-      <ion-button (click)="addProduct(item)" slot="end">A</ion-button>
-      <img src="{{item.imageURl}}" alt=""/>
-    </div>
-  </div> -->
   </div>
   <div *ngIf="!idea.id">
     <ion-button (click)="save()" color="success" expand="block" fill="outline" [disabled]="disablebtn">

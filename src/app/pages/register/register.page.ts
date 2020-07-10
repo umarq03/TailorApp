@@ -20,6 +20,7 @@ export class RegisterPage implements OnInit {
   // successMessage: string = '';
 
   allet: any;
+  alet:any;
   email: string
   password: string
 
@@ -44,39 +45,8 @@ export class RegisterPage implements OnInit {
     }
 
   ngOnInit() {
-    // this.validations_form = this.formbuilder.group({
-    //   email: new FormControl('', Validators.compose([
-    //     Validators.required,
-    //     Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-    //   ])),
-    //   password: new FormControl('', Validators.compose([
-    //     Validators.minLength(5),
-    //     Validators.required
-    //   ])),
-    // });
   }
-
-  // async tryRegister(value) {
-  //   const loading = await this.presentLoading();
-  //   this.authservice.registerUser(value)
-  //     .then(res => {
-  //       console.log(res);
-  //       this.errorMessage = "";
-  //       this.successMessage = "Your account has been created. Please log in.";
-  //       this.AllertAll("Signing UP Successfully", "");
-  //       this.loadingCtrl.dismiss(); 
-  //     }, err => {
-  //       console.log(err);
-  //       this.errorMessage = err.message;
-  //       this.successMessage = "";
-  //       this.loadingCtrl.dismiss(); 
-
-  //     })
-  // }
-
-  // goLoginPage() {
-  //   this.navCtrl.navigateBack('/login');
-  // }
+  
 
   async getregister() {
     try {
@@ -92,7 +62,7 @@ export class RegisterPage implements OnInit {
 
     } catch (error) {
       this.loadingCtrl.dismiss(); 
-      this.AllertAll('Invalid email, password,',error.message);
+      this.AllertAl('Invalid email, password,',error.message);
         console.dir("Error", error.message);
     }
   }
@@ -104,10 +74,25 @@ export class RegisterPage implements OnInit {
       header: header,
       message: message,
       // buttons: ['ok']
-      duration: 3000
+      duration: 3000,
+      color:'success'
     })
 
     await this.allet.present();
+
+  }
+  async AllertAl(header: string, message: string) {
+
+    this.alet = await this.toast.create({
+
+      header: header,
+      message: message,
+      // buttons: ['ok']
+      duration: 3000,
+      color:'danger'
+    })
+
+    await this.alet.present();
 
   }
 

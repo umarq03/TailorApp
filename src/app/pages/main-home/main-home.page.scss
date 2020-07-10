@@ -160,6 +160,18 @@ h4{
     color: white;
     text-transform: capitalize;
 }
+ion-spinner{
+    
+    position: relative;
+    bottom: 300px;
+    left: 110px;
+    --font-size: 60px;
+    --color: white;
+    transform: scale(2.5);
+}
+.my-custom-class {
+    --background: #222;
+  }
 
   
 

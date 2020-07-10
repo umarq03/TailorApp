@@ -13,11 +13,13 @@ export class KurtadatabasePage implements OnInit {
   skdatabase = SkdatabasePage;
   private kurtadata: Observable<Kurta[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
   constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.getDatabase();
+    this.kurtadata.subscribe(()=> this.searching = false);
+
   }
   searchTerm = '';
   searchText = '';
@@ -46,10 +48,7 @@ export class KurtadatabasePage implements OnInit {
     }, 2000);
   }
   getDatabase() {
-    this.searching = true;
-    this.kurtadata = this.database.getKurtas();
-    this.searching = false;
-     
+    this.kurtadata = this.database.getKurtas();     
   }
 
 }

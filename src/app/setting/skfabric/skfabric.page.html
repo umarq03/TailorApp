@@ -7,31 +7,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <div>
-    <h3>Add Summer Fabric</h3>
+    <h3 class="ion-padding">Add Summer Fabric</h3>
     <ion-item>
       <ion-label>FabName:</ion-label>
-      <ion-input type="text" [(ngModel)]="fabname" placeholder="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="summerfab.fabname" placeholder="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="file" name="inputFile" (change)="chooseFabricSummer($event)" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Price:</ion-label>
-      <ion-input type="text" [(ngModel)]="price" placeholder="price"></ion-input>
+      <ion-input type="text" [(ngModel)]="summerfab.price" placeholder="price"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Meter:</ion-label>
-      <ion-input type="text" [(ngModel)]="meter" placeholder="3.4/meter"></ion-input>
+      <ion-input type="text" [(ngModel)]="summerfab.meter" placeholder="3.4/meter"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Discount in %:</ion-label>
-      <ion-input type="text" [(ngModel)]="discount" placeholder="% off"></ion-input>
+      <ion-input type="text" [(ngModel)]="summerfab.discount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.stitching" placeholder="suit stitching"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Availability:</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="stock">
+      <ion-select placeholder="Select One" [(ngModel)]="summerfab.stock">
         <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
         <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
       </ion-select>
@@ -46,29 +50,33 @@
   </div>
 
   <div>
-    <h3>Add Winter Fabric</h3>
+    <h3 class="ion-padding">Add Winter Fabric</h3>
     <ion-item>
       <ion-label>FabName:</ion-label>
-      <ion-input type="text" [(ngModel)]="Wfabname" placeholder="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="winterfab.fabname" placeholder="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="file" name="inputFile" (change)="chooseFabricWinter($event)" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Price:</ion-label>
-      <ion-input type="text" [(ngModel)]="Wprice" placeholder="price"></ion-input>
+      <ion-input type="text" [(ngModel)]="winterfab.price" placeholder="price"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Meter:</ion-label>
-      <ion-input type="text" [(ngModel)]="Wmeter" placeholder="3.4/meter"></ion-input>
+      <ion-input type="text" [(ngModel)]="winterfab.meter" placeholder="3.4/meter"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Discount in %:</ion-label>
-      <ion-input type="text" [(ngModel)]="Wdiscount" placeholder="% off"></ion-input>
+      <ion-input type="text" [(ngModel)]="winterfab.discount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.stitching" placeholder="suit stitching"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Availability:</ion-label>
-      <ion-select placeholder="Select One" [(ngModel)]="Wstock">
+      <ion-select placeholder="Select One" [(ngModel)]="winterfab.stock">
         <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
         <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
       </ion-select>

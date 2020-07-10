@@ -1,57 +1,5 @@
-<!-- <ion-header>
-  <ion-toolbar color="medium">
-    <ion-title class="title">Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <div id="container">
-    <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
-
-      <ion-item>
-          <ion-icon name="person-circle"></ion-icon>
-        <ion-input type="text" placeholder="Username"></ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-icon name="mail"></ion-icon>
-        <ion-input type="text" formControlName="email" placeholder="Email"></ion-input>
-      </ion-item>
-      <div class="validation-errors" class="secondary">
-        <ng-container *ngFor="let validation of validation_messages.email">
-          <div class="error-message" 
-            *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
-
-      <ion-item>
-          <ion-icon name="lock-closed"></ion-icon>
-        <ion-input type="password" formControlName="password" class="form-controll" required placeholder="Password"></ion-input>
-      </ion-item>
-      <div class="validation-errors" class="secondary">
-        <ng-container *ngFor="let validation of validation_messages.password">
-          <div class="error-message" 
-            *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
-
-
-      <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid" color="success" expand="block"
-        fill="outline" class="signup">
-        <ion-icon name="person-add-outline"></ion-icon>
-        Register</ion-button>
-      <ion-label class="error-message" color="danger">{{errorMessage}}</ion-label>
-      <ion-label class="success-message" color="success">{{successMessage}}</ion-label>
-    </form>
-    <p class="go-to-login">Already have an account? <a (click)="goLoginPage()">Try to Log In.</a></p>
-  </div>
-</ion-content> -->
-
 <ion-header>
-  <ion-toolbar color="medium">
+  <ion-toolbar color="secondary">
     <ion-title class="title">Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>

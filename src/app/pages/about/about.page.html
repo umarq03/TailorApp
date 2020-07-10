@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="medium">
+  <ion-toolbar color="secondary">
     <ion-title>About</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="main-home"></ion-back-button>
@@ -17,6 +17,7 @@
       <h6 *ngFor="let setting of (aboutSetting | async) " class="title">
         {{setting.subtitle}}
       </h6>
+      <ion-spinner name="dots" *ngIf="searching || (aboutSetting | async) == 0"></ion-spinner>
     </ion-card-header>
     <ion-card-content class="ion-text-justify" *ngFor="let setting of (aboutSetting | async) ">
       {{setting.message}}
@@ -32,13 +33,13 @@
     <ion-item>
       <ion-icon name="call-outline"></ion-icon>
       <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
-       {{setting.phonenumber}}
+        {{setting.phonenumber}}
       </ion-card-content>
     </ion-item>
     <ion-item>
       <ion-icon name="time-outline"></ion-icon>
       <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
-       {{setting.timing}}
+        {{setting.timing}}
       </ion-card-content>
     </ion-item>
     <ion-item>
@@ -50,10 +51,3 @@
   </div>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-item>
-      <p>{{fullname}}</p>
-    </ion-item>
-  </ion-toolbar>
-</ion-footer>

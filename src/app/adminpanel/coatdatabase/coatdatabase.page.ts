@@ -13,11 +13,13 @@ export class CoatdatabasePage implements OnInit {
   skdatabase = SkdatabasePage;
   private coatdata: Observable<Coat[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
   constructor(private database: DatabaseService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.getDatabase();
+    this.coatdata.subscribe(()=> this.searching = false);
+
   }
   searchTerm = '';
   searchText = '';
@@ -46,9 +48,6 @@ export class CoatdatabasePage implements OnInit {
     }, 2000);
   }
   getDatabase() {
-    this.searching = true;
-    this.coatdata = this.database.getCoats();
-    this.searching = false;
-     
+    this.coatdata = this.database.getCoats();     
   }
 }

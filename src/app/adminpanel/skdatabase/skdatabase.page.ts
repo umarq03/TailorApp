@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SkdatabasePage implements OnInit {
   private skdata: Observable<Idea[]>;
   offset = 0;
-  searching = false;
+  searching: boolean = true;
   public name: string;
   public sk : string;
   private about = [];
@@ -24,6 +24,8 @@ export class SkdatabasePage implements OnInit {
 
   ngOnInit() {
     this.getDatabase();
+    this.skdata.subscribe(()=> this.searching = false);
+
   }
   searchTerm = '';
   searchText = '';
@@ -54,10 +56,7 @@ export class SkdatabasePage implements OnInit {
   }
 
   getDatabase() {
-    this.searching = true;
     this.skdata = this.database.getIdeas();
-    this.searching = false;
-
   }
   getCart() {
 

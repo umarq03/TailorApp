@@ -95,10 +95,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/skfab/skfab.module').then( m => m.SkfabPageModule)
   },
   {
-    path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
-  },
-  {
     path: 'kameezdesigns',
     loadChildren: () => import('./pages/kameezdesigns/kameezdesigns.module').then( m => m.KameezdesignsPageModule)
   },
@@ -106,10 +102,6 @@ const routes: Routes = [
   {
     path: 'admin-database',
     loadChildren: () => import('./adminpanel/admin-database/admin-database.module').then( m => m.AdminDatabasePageModule)
-  },
-  {
-    path: 'checkout',
-    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
   {
     path: 'skdatabase',
@@ -262,6 +254,54 @@ const routes: Routes = [
   {
     path: 'editfabric',
     loadChildren: () => import('./setting/editfabric/editfabric.module').then( m => m.EditfabricPageModule)
+  },
+  {
+    path: 'editpantfabric',
+    loadChildren: () => import('./setting/editpantfabric/editpantfabric.module').then( m => m.EditpantfabricPageModule)
+  },
+  {
+    path: 'editshirtfabric',
+    loadChildren: () => import('./setting/editshirtfabric/editshirtfabric.module').then( m => m.EditshirtfabricPageModule)
+  },
+  {
+    path: 'editkurtafabric',
+    loadChildren: () => import('./setting/editkurtafabric/editkurtafabric.module').then( m => m.EditkurtafabricPageModule)
+  },
+  {
+    path: 'editcoatfabric',
+    loadChildren: () => import('./setting/editcoatfabric/editcoatfabric.module').then( m => m.EditcoatfabricPageModule)
+  },
+  {
+    path: 'editwcoatfabric',
+    loadChildren: () => import('./setting/editwcoatfabric/editwcoatfabric.module').then( m => m.EditwcoatfabricPageModule)
+  },
+  {
+    path: 'addesign',
+    loadChildren: () => import('./setting/addesign/addesign.module').then( m => m.AddesignPageModule)
+  },
+  {
+    path: 'skdesign',
+    loadChildren: () => import('./setting/skdesign/skdesign.module').then( m => m.SkdesignPageModule)
+  },
+  {
+    path: 'pantdesign',
+    loadChildren: () => import('./setting/pantdesign/pantdesign.module').then( m => m.PantdesignPageModule)
+  },
+  {
+    path: 'shirtdesign',
+    loadChildren: () => import('./setting/shirtdesign/shirtdesign.module').then( m => m.ShirtdesignPageModule)
+  },
+  {
+    path: 'kurtadesign',
+    loadChildren: () => import('./setting/kurtadesign/kurtadesign.module').then( m => m.KurtadesignPageModule)
+  },
+  {
+    path: 'coatdesign',
+    loadChildren: () => import('./setting/coatdesign/coatdesign.module').then( m => m.CoatdesignPageModule)
+  },
+  {
+    path: 'wcoatdesign',
+    loadChildren: () => import('./setting/wcoatdesign/wcoatdesign.module').then( m => m.WcoatdesignPageModule)
   },
 ////
 ];
