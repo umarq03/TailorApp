@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="main-title">Home</ion-title>
+    <ion-button (click)="presentPopover($event)" slot="end" fill="clear">
+      <ion-icon name="ellipsis-vertical-outline" mode="md" slot="icon-only" color="secondary"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <img src="assets/mainimage.jpg" class="image">
+  </div>
+  <section>
+      <img src="assets/00.jpg" alt="mainlogo" class="logo"> 
+      <h1 class="title2" *ngFor="let setting of (titleSetting | async) ">{{setting.title}}</h1>
+    <span class="civil" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle1}}</span>
+    <span class="custom" *ngFor="let setting of (titleSetting | async) ">{{setting.subtitle2}}</span>
+    <ion-spinner name="dots" *ngIf="searching || (starterSetting | async) == 0"></ion-spinner>
+  </section>
+
+  <ion-grid>
+    <ion-row class="row-one">
+      <ion-col col-6>
+        <ion-card class="category" [routerLink]="['/categories']">
+          <ion-icon name="body-outline" style="color:#674172;"></ion-icon>
+          <h4>Measurements</h4>
+        </ion-card>
+
+      </ion-col>
+      <ion-col col-6>
+        <ion-card class="designs" [routerLink]="['/designs']">
+          <ion-icon name="albums-outline" style="color:#674172;"></ion-icon>
+          <h4>Designs</h4>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="row-two">
+      <ion-col col-6>
+        <ion-card class="fabrics" [routerLink]="['/fabrics']">
+          <ion-icon name="grid-outline" style="color:#674172;"></ion-icon>
+          <h4>Fabrics</h4>
+        </ion-card>
+
+      </ion-col>
+      <ion-col col-6>
+        <ion-card class="order" [routerLink]="['/pricelist']">
+          <ion-icon name="list-outline" style="color:#674172;"></ion-icon>
+          <h4>RateList</h4>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-card >
+      <ion-card-content class="connStatus" >
+        Your ConnectionStatus: {{ networkStatus && networkStatus.connected ? 'Online' : 'Offline'}}
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
+</ion-footer>
+
+

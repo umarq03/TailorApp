@@ -1,0 +1,24 @@
+img{
+    height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  margin: auto;
+  display: block;
+}
+h6{
+    color: blue
+}
+.title{
+  text-transform: capitalize;
+}
+ion-spinner{
+    
+  margin: auto;
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+  text-align: center;
+  transform: scale(1.8)
+}

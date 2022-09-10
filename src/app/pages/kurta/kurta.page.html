@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="categories"></ion-back-button>
+        </ion-buttons>
+    <ion-title>kurta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item (click)="getkurtafab()">
+    <h6>If you want to buy fabric, then tap!</h6><br />
+    <h6>Otherwise skip it</h6>
+    <ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-item>
+  <ion-item *ngFor="let fabric of kurta">
+    <b>{{fabric.fabname}}<small>{{fabric.price | currency: 'Rs'}}</small></b><br />
+    stitching:<small>{{fabric.stitching}}</small>
+    <ion-button slot="end" color="medium" fill="clear" (click)="removeItem(fabric)">
+      <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-item (click)=" getkurtadesigns()">
+    <h6>Choose design</h6>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item *ngFor="let design of coatdesigns">
+    <b>{{design.name}}<small>{{design.price | currency: 'Rs'}}</small></b>
+    <ion-button slot="end" color="medium" fill="clear" (click)="removedesigns(design)">
+      <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-card>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="idea.fullname" placeholder="FullName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="tel" [(ngModel)]="idea.phonenumber" placeholder="PhoneNumber(Enter correct #)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="idea.address" placeholder="Address"></ion-input>
+    </ion-item>
+
+  </ion-card>
+
+  <ion-card>
+
+    <ion-item>
+      <img src="assets/images/measurement/kurta/1.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.lambai" placeholder="LAMBAI(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/2.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.chatti" placeholder="CHATTI(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/3.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.teera" placeholder="TEERA(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/4.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.kameezbazu" placeholder="BAZU(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/5.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.neck" placeholder="NECK(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/6.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.kameezdaman" placeholder="DAMAN(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/7.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.shalwarlambai" placeholder="S-LAMBAI(inches)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <img src="assets/images/measurement/kurta/8.jpg" class="image1" slot="start">
+      <ion-input type="number" [(ngModel)]="idea.pancha" placeholder="PANCHA(inches)"></ion-input>
+    </ion-item>
+    <ion-item class="label">
+      PREFERENCES
+    </ion-item>
+    <ion-item *ngFor="let fabric of kurta">
+      <ion-label>SELECT FABRIC</ion-label>
+      <ion-select [(ngModel)]="idea.fabric" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="{{fabric.fabname}}{{fabric.price | currency:'Rs'}}">
+          {{fabric.fabname}}-{{fabric.price | currency: 'Rs'}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngFor="let design of kurtadesigns">
+      <ion-label>SELECT DESIGN</ion-label>
+      <ion-select [(ngModel)]="idea.design" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="{{design.name}}{{design.price | currency:'Rs'}}">
+          {{design.name}}-{{design.price | currency: 'Rs'}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>SHALWAR</ion-label>
+      <ion-select [(ngModel)]="idea.shalwar" value="gol" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="white">WHITE</ion-select-option>
+        <ion-select-option value="black">BLACK</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>DAMAN</ion-label>
+      <ion-select [(ngModel)]="idea.daman" value="gol" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="gol">GOL</ion-select-option>
+        <ion-select-option value="seedah">SEEDAH</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>POCKETS</ion-label>
+      <ion-select [(ngModel)]="idea.pockets" multiple="true" placeholder="Select Multiple" cancelText="Cancel"
+        okText="Okay">
+        <ion-select-option value="frontpocket">FRONT-POCKET</ion-select-option>
+        <ion-select-option value="sidepocket">SIDE-POCKET</ion-select-option>
+        <ion-select-option value="twosidepocket">TWO-SIDE-POCKET</ion-select-option>
+        <ion-select-option value="shalwarpocket">SHALWAR-POCKET</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>COLLAR OR BAIN</ion-label>
+      <ion-select [(ngModel)]="idea.collar" value="collar" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="collar">COLLAR</ion-select-option>
+        <ion-select-option value="fullbain">FULL-BAIN</ion-select-option>
+        <ion-select-option value="cutbain">CUT-BAIN</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>BAZU</ion-label>
+      <ion-select [(ngModel)]="idea.bazu" value="gol" cancelText="Cancel" okText="Okay">
+        <ion-select-option value="gol">GOL</ion-select-option>
+        <ion-select-option value="kaff">KAFF</ion-select-option>
+        <ion-select-option value="open">OPEN</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let total of kurta">
+      <ion-item>
+        <h2>Your Total</h2>
+      </ion-item>
+      <ion-item>
+      Fabric: <span slot="end">{{total.price | currency: 'Rs'}}</span>
+    </ion-item>
+    <ion-item>
+        Stitching: <span slot="end">{{total.stitching | currency: 'Rs'}}</span>
+      </ion-item>
+      <ion-item>
+          Total: <span slot="end">{{ getTotal() | currency:'Rs'}}</span>
+        </ion-item>
+    </ion-card>
+  <ion-card *ngIf="!idea.id">
+    <div>
+      <ion-button (click)="addDatabase()" color="success" expand="block" fill="outline" [disabled]="disablebtn">
+        Submit
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
+
+</ion-content>
+
+
+
+<ion-footer *ngIf="idea.id">
+  <ion-row no-padding text-center>
+    <ion-col size="6">
+      <ion-button expand="block" fill="outline" color="danger" (click)="deleteIdea()">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        Delete
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" fill="solid" color="success" (click)="updateIdea()">
+        <ion-icon name="save" slot="start"></ion-icon>
+        Update
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="addfab"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kurtafabric</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <h3 class="ion-padding">Add Summer Fabric</h3>
+    <ion-item>
+      <ion-label>FabName:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.fabname" placeholder="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file" name="inputFile" (change)="chooseFabricSummer($event)" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.price" placeholder="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meter:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.meter" placeholder="3.4/meter"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount in %:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.discount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="summerfab.stitching" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Availability:</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="summerfab.stock">
+        <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
+        <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div>
+      <ion-button (click)="addsumm()" color="success" expand="block" fill="outline">
+        Add summer
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="ion-padding">Add Winter Fabric</h3>
+    <ion-item>
+      <ion-label>FabName:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.fabname" placeholder="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file" name="inputFile" (change)="chooseFabricWinter($event)" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.price" placeholder="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meter:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.meter" placeholder="3.4/meter"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount in %:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.discount" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="winterfab.stitching" placeholder="% off"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Availability:</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="winterfab.stock">
+        <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
+        <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div>
+      <ion-button (click)="addwint()" color="primary" expand="block" fill="outline">
+        Add winter
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+
+</ion-content>

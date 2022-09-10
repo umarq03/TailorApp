@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-setting"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ratelistSettings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Shalwar-kameez:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.skameez"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Shalwar-kameez Double:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.skameezdouble"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Shirt:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.shirt"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Pant:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.pant"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kurta:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.kurta"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Kurta Double:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.kurtadouble"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Waist-Coat:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.wcoat"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Coat:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.coat"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Two-Piece:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.twopiece"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Three-Piece:</ion-label>
+    <ion-input type="number" [(ngModel)]="idea.threepiece"></ion-input>
+  </ion-item>
+  <div *ngIf="!idea.id">
+    <ion-button (click)="save()" color="success" expand="block" fill="outline" [disabled]="disablebtn">
+      Save
+      <ion-icon name="checkmark" slot="start"></ion-icon>
+    </ion-button>
+  </div>
+  <div *ngIf="idea.id">
+    <ion-row no-padding text-center>
+      <ion-col size="6">
+        <ion-button expand="block" fill="solid" color="success" (click)="updateIdea()">
+          <ion-icon name="save" slot="end"></ion-icon>
+          Update
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" fill="solid" color="medium" (click)="add()">
+          <ion-icon name="add-outline" slot="end"></ion-icon>
+          Add More
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

@@ -1,0 +1,49 @@
+:host{
+    ion-content{
+        --background: url('../../../assets/mainimage.jpg') no-repeat center center / cover;
+        opacity: 1;
+        position: fixed;
+    }
+}
+img{
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    display: block;
+    margin-top: 60px;
+    opacity: 0.6;
+}
+#container{
+    display: block;
+    margin: auto;
+    padding: 20px 50px;
+    text-align: center;
+    position: relative;
+    
+}
+
+h1{
+    font-size: 28px;
+    text-transform: capitalize;
+    color: white
+}
+p{
+    text-align: justify;
+    font-size: 20px;
+    color: white
+}
+ion-spinner{
+    
+    margin: auto;
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    bottom: 0; 
+    right: 0;
+    text-align: center;
+    padding-top: 30px;
+    --color: white;
+    transform: scale(1.2);
+
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search" [(ngModel)]="searchTerm" (ionChange)="filterMe()"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list id="skeleton" *ngIf="searching || (pantdata | async) == 0">
+    <ion-card lines="none" *ngFor="let i of [1,2,3]">
+      <ion-card-content>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-label class="label" color="medium">No Data Yet!</ion-label>
+    <ion-icon name="sad-outline" class="icon" color="medium"></ion-icon>
+  </ion-list>
+ <ion-list>
+  <ion-card button [routerLink]="['/pant', pant.id]" *ngFor="let pant of (pantdata | async) "
+    style="white-space: pre-wrap;">
+    <ion-card-content>
+      Name:{{ pant.fullname}}<br />
+      Fabric:{{pant.fabric}}<br /> 
+      Design:{{pant.design}}<br />
+      phone:{{pant.phonenumber}}<br />  
+      Date:{{ pant.creaditAt | date:'short' }}
+    </ion-card-content>  
+  </ion-card>
+</ion-list>
+
+</ion-content>

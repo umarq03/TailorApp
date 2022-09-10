@@ -1,0 +1,18 @@
+<ion-app padding>
+  <ion-content>
+    <img src="assets/00.jpg" alt="">
+    <div id="container">
+      <h1 *ngFor="let setting of (starterSetting | async) " class="h1">{{setting.maintitle}}</h1>
+    
+      <p *ngFor="let setting of (starterSetting | async) " class="p">
+        {{setting.message}}
+      </p>
+    
+      <ion-spinner name="lines" *ngIf="searching || (starterSetting | async) == 0"></ion-spinner>
+    </div>
+    <ion-button color="success" expand="block" fill="outline" (click)="navigatetologin()" class="startbtn">
+      <ion-icon name="chevron-forward-outline" color="success"></ion-icon>
+      Start
+    </ion-button>
+  </ion-content>
+</ion-app>

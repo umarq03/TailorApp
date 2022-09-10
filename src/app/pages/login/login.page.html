@@ -1,0 +1,31 @@
+<ion-header ion-no-border>
+  <ion-toolbar color="secondary">
+    <ion-title class="title">Sign In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="container">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="mail"></ion-icon>
+        <ion-input type="text" [(ngModel)]="email" placeholder="Email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="lock-closed"></ion-icon>
+        <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+      </ion-item>
+
+      <p class="ion-padding info-1">
+        To start it would be nice to pray.<br />
+        If you don't have an account, Get <span (click)="getregister()">Sign UP</span>
+      </p>
+      <ion-button color="success" expand="block" fill="outline" (click)="getlogin()" class="signin"
+        [disabled]="disabledbtn">
+        <ion-icon name="log-in-outline"></ion-icon>
+        Sign In
+      </ion-button>
+    </ion-list>
+  </div>
+</ion-content>

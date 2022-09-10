@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="addesign"></ion-back-button>
+          </ion-buttons>
+      <ion-title>waistcoatdesign</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+      <div>
+          <h3 class="ion-padding">Add Design</h3>
+          <ion-item>
+            <ion-label>DesignName:</ion-label>
+            <ion-input type="text" [(ngModel)]="design.name" placeholder="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="file" name="inputFile" (change)="choosedesign($event)" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Price:</ion-label>
+            <ion-input type="text" [(ngModel)]="design.price" placeholder="price"></ion-input>
+          </ion-item>
+          <div>
+            <ion-button (click)="add()" color="success" expand="block" fill="outline">
+              Add
+              <ion-icon name="checkmark" slot="start"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+  
+  </ion-content>
+  

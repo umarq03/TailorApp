@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>About</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main-home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="assets/mainpic.jpg" alt="">
+    <ion-card-header>
+      <ion-card-title text-wrap *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.title}}
+      </ion-card-title>
+      <h6 *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.subtitle}}
+      </h6>
+      <ion-spinner name="dots" *ngIf="searching || (aboutSetting | async) == 0"></ion-spinner>
+    </ion-card-header>
+    <ion-card-content class="ion-text-justify" *ngFor="let setting of (aboutSetting | async) ">
+      {{setting.message}}
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-text-center">
+    <ion-item>
+      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.prop}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
+        {{setting.phonenumber}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) ">
+        {{setting.timing}}
+      </ion-card-content>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-card-content *ngFor="let setting of (aboutSetting | async) " class="title">
+        {{setting.location}}
+      </ion-card-content>
+    </ion-item>
+  </div>
+
+</ion-content>

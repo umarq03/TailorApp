@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="fabrics"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit sk fabric</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+  <h4>Edit Sk Summer or Winter Fabric</h4>
+    <ion-item>
+      <ion-label>FabName:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.fabname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meter:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.meter"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Discount in %:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.discount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suit stitching:</ion-label>
+      <ion-input type="text" [(ngModel)]="fabric.stitching"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Availability:</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="fabric.stock">
+        <ion-select-option value="AvailableNow">AvailableNow</ion-select-option>
+        <ion-select-option value="OutOfStock">OutOfStock</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div>
+    <ion-button (click)="updateSummer(fabric.fabname, fabric.price, fabric.discount, fabric.meter, fabric.stock )" color="danger"
+      expand="block" fill="outline">update summer</ion-button>
+  </div>
+  <h4>OR</h4>
+  <div>
+    <ion-button (click)="updateWinter(fabric.fabname, fabric.price, fabric.discount,fabric.meter, fabric.stock)" color="secondary"
+      expand="block" fill="outline">update Winter</ion-button>
+  </div>
+</ion-content>
